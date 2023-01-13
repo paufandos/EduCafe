@@ -1,40 +1,5 @@
 let modals = [
     {
-        id: "login",
-        tamanyo: "c-modal--medium",
-        code: `<div>
-                    <div class="l-flex l-flex--align-items-center l-flex--justify-content-end g--margin-bottom-5">
-                    <i class="c-icon c-icon--small c-icon--close-light fa-sharp fa-solid fa-xmark close"></i>
-                    </div>
-                </div>
-                <div class="l-columns">
-                    <form class="c-bubble">
-                    <div class="c-title">Inicio de sesión</div>
-                    <label class="c-label" for="usuario">Usuario</label>
-                    <input id="usuario" class="c-input c-input--w-100" name="usuario" type="text"
-                        placeholder="Escribe aquí tu nombre de usuario">
-
-                    <label class="c-label" for="password">Contraseña</label>
-                    <input id="password" class="c-input c-input--w-100" name="password" type="password"
-                        placeholder="Escribe aquí tu contraseña">
-
-                    <div class="g--text-align-center">
-                        <button class="c-button g--margin-top-10" type="submit">Inicia sesión</button><br>
-                        <button class="c-button c-button--principal-terciario g--margin-top-2">¿Has olvidado tu contraseña?</button>
-                    </div>
-                    </form>
-                    <div class="g--text-align-center">
-                    <div class="c-title c-title--alternativo">Bienvenido a</div>
-                    <img src="./assets/img/EducaCafe-2-08.png" alt="educafe_logo" class="c-img">
-                    <div>
-                        <button class="c-button c-button--alternativo-terciario g--margin-bottom-2">¿No tienes cuenta?
-                        Regístrate</button><br>
-                        <button id="registro" class="c-button c-button--secuendario">Regístrarse</button>
-                    </div>
-                    </div>
-                </div>`
-    },
-    {
         id: "pago",
         tamanyo: "c-modal--xsmall",
         code: ` <div class="c-bubble">
@@ -82,41 +47,7 @@ let modals = [
     {
         id: "registro",
         tamanyo: "c-modal--xsmall",
-        code: `<div class="c-bubble">
-                    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
-                    <div class="c-title">Formulario de registro</div>
-                    <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
-                    </div>
-                    <form>
-                    <label class="c-label" for="nombre">Nombre</label>
-                    <input id="nombreRegistro" class="c-input c-input--w-100" name="nombreRegistro" type="text"
-                        placeholder="Escriba su nombre">
-                
-                    <label class="c-label" for="apellido1">Primer apellido</label>
-                    <input id="apellido1Registro" class="c-input c-input--w-100" type="text" name="apellido1Registro"
-                        placeholder="Escriba su primer apellido">
-                
-                    <label class="c-label" for="apellido2">Segundo apellido</label>
-                    <input id="apellido2Registro" class="c-input c-input--w-100" name="apellido2Registro" type="text"
-                        placeholder="Escriba su segundo apellido">
-                
-                    <label class="c-label" for="correoRegistro">Correo electrónico</label>
-                    <input id="correoRegistro" class="c-input c-input--w-100" name="correoRegistro" type="text"
-                        placeholder="Escriba su correo electrónico">
-                
-                    <label class="c-label" for="passwordRegistro">Contraseña</label>
-                    <input id="passwordRegistro" class="c-input c-input--w-100" type="password" name="passwordRegistro"
-                        placeholder="Escriba su contraseña">
-                
-                    <label class="c-label" for="confirmarPasswordRegistro">Confirmar contraseña</label>
-                    <input id="confirmarPasswordRegistro" class="c-input c-input--w-100" type="password"
-                        name="confirmarPasswordRegistro" placeholder="Confirme su contraseña">
-                
-                    <div class="g--text-align-right g--margin-top-10">
-                        <button class="c-button">Confirmar registro</button>
-                    </div>
-                    </form>
-                </div>`
+        code: ``
     },
     {
         id: "carrito",
@@ -174,7 +105,7 @@ let modals = [
                     <button class="c-button c-button--terciario">Eliminar</button>
                 </div>
                 </div>
-            
+
                 <div class="c-cart-row__footer l-flex l-flex--align-items-center l-flex--justify-content-space-between">
                 <div class="c-title">Total: 4.30 €</div>
                 <button id="pago" class="c-button">Confirmar carrito</button>

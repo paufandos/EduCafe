@@ -1,11 +1,15 @@
 const ESTADO_CARRITO = { 0: "Pago realizado", 1: "Pendiente de pago", 2: "Pendiente de pago (actual)" };
+let isLogin = false;
+let activeUser;
 
 window.onload = () => {
     document.getElementById("login_icon").onclick = modalLogin;
     document.getElementById("cart_icon").onclick = verCarrito();
     document.getElementById("cart-list_icon").onclick = () => historialCarritos(1);
+
     addRefreshEvents();
     mostrarCategorias();
+
 };
 
 function addRefreshEvents() {
@@ -30,7 +34,7 @@ function mostrarCategorias() {
             main.innerHTML = `<div id="categorias" class="l-columns-3"></div>`;
             let layout = document.getElementById("categorias");
 
-            JSON.parse(listadoCategorias).forEach(cat => {
+            listadoCategorias.forEach(cat => {
                 layout.innerHTML += `<div id="${cat.id}" class="c-card">
                                 <div class="c-card__nombre">${cat.nombre.toUpperCase()}</div>
                                 <img src="./assets/img/${cat.nombre}.jpg" class="c-card__imagen" alt="${cat.nombre}" />
@@ -62,7 +66,7 @@ function mostrarProductos(id) {
             main.innerHTML = `<div id="products" class="c-products"></div>`;
 
             let layout = document.getElementById("products");
-            let productosCategoriaSeleccionada = JSON.parse(listadoProductos).filter(p => p.id_categoria == id);
+            let productosCategoriaSeleccionada = listadoProductos.filter(p => p.id_categoria == id);
 
             productosCategoriaSeleccionada.forEach(p => {
                 layout.innerHTML += `<div class="c-item">
@@ -120,25 +124,85 @@ function fadeAnimation(modalId) {
 
 function modalLogin() {
     let dialog = document.getElementById("dialog");
-    let modal = modals.find(m => m.id == "login");
+    dialog.close();
+    if (isLogin) {
+        changeLogInInterface(activeUser);
+    } else {
+        dialog.classList = "c-modal c-modal--medium loginModal"
+        dialog.innerHTML = `<div>
+                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-end g--margin-bottom-5">
+                            <i class="c-icon c-icon--small c-icon--close-light fa-sharp fa-solid fa-xmark close"></i>
+                            </div>
+                        </div>
+                        <div class="l-columns">
+                            <form id="formLogin" class="c-bubble">
+                                <div class="c-title">Inicio de sesión</div>
+                                <label class="c-label" for="usuario">Usuario</label>
+                                <input id="usuario" class="c-input c-input--w-100" name="usuario" type="text"
+                                    placeholder="Escribe aquí tu nombre de usuario">
 
-    dialog.classList.add(modal.tamanyo);
-    dialog.classList.add("loginModal");
-    dialog.innerHTML = modal.code;
+                                <label class="c-label" for="password">Contraseña</label>
+                                <input id="password" class="c-input c-input--w-100" name="password" type="password"
+                                    placeholder="Escribe aquí tu contraseña">
+                                <div class="g--text-align-center">
+                                    <button id="botonInicioSesion" class="c-button g--margin-top-10" type="submit">Inicia sesión</button><br>
+                                    <button class="c-button c-button--principal-terciario g--margin-top-2">¿Has olvidado tu contraseña?</button>
+                                </div>
+                            </form>
+                           
+                            <div class="g--text-align-center">
+                                <div class="c-title c-title--alternativo">Bienvenido a</div>
+                                <img src="./assets/img/EducaCafe-2-08.png" alt="educafe_logo" class="c-img">
+                                <div>
+                                    <button class="c-button c-button--alternativo-terciario g--margin-bottom-2">¿No tienes cuenta? Regístrate</button><br>
+                                    <button id="registro" class="c-button c-button--secuendario">Regístrarse</button>
+                                </div>
+                            </div>
+                        </div>`;
 
-    fadeAnimation("loginModal");
-    document.getElementById("registro").onclick = modalRegistro;
-    dialog.showModal();
+        fadeAnimation("loginModal");
+        document.getElementById("registro").onclick = modalRegistro;
+        document.getElementById("formLogin").onsubmit = () => iniciarSesion(event);
+        dialog.showModal();
+    }
 }
 
 function modalRegistro() {
     let dialog = document.getElementById("dialog");
     dialog.close();
-    let modal = modals.find(m => m.id == "registro");
 
-    dialog.classList = "c-modal " + modal.tamanyo + " registroModal";
-    dialog.innerHTML = modal.code;
+    dialog.classList = "c-modal c-modal--xsmall registroModal";
+    dialog.innerHTML = `<div class="c-bubble">
+                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                                <div class="c-title">Formulario de registro</div>
+                                <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                            </div>
+                            <form id="formRegistro">
+                                <label class="c-label" for="nombre">Nombre</label>
+                                <input id="nombre" class="c-input c-input--w-100" name="nombre" type="text"
+                                    placeholder="Escriba su nombre">
 
+                                <label class="c-label" for="apellidos">Apellidos</label>
+                                <input id="apellidos" class="c-input c-input--w-100" type="text" name="apellidos"
+                                    placeholder="Escriba sus apellidos">
+
+                                <label class="c-label" for="correo">Correo electrónico</label>
+                                <input id="correo" class="c-input c-input--w-100" name="correo" type="text"
+                                    placeholder="Escriba su correo electrónico">
+
+                                <label class="c-label" for="password">Contraseña</label>
+                                <input id="password" class="c-input c-input--w-100" type="password" name="password"
+                                    placeholder="Escriba su contraseña">
+
+                                <label class="c-label" for="confirmPassword">Confirmar contraseña</label>
+                                <input id="confirmPassword" class="c-input c-input--w-100" type="password"
+                                    name="confirmPassword" placeholder="Confirme su contraseña">
+                            </form>
+                            <div class="g--text-align-right g--margin-top-10">
+                                <button id="botonRegistro" class="c-button">Confirmar registro</button>
+                            </div>
+                        </div>`;
+    document.getElementById("botonRegistro").onclick = registrarUsuario;
     fadeAnimation("registroModal");
     dialog.showModal();
 }
@@ -225,13 +289,12 @@ function mostrarDetalleProducto(idProducto) {
     //declaracion de parametros que pasaremos al request
     const parametro = "productos";
     const method = "get";
-    console.log(idProducto)
 
     //promesa para pintar las categorias
     request(method, parametro, null)
         //resolve de la promesa
         .then(listadoProductos => {
-            let articulo = JSON.parse(listadoProductos).find(p => p.id == idProducto);
+            let articulo = listadoProductos.find(p => p.id == idProducto);
 
             dialog.classList = "c-modal c-modal--small detalleProductoModal";
             dialog.innerHTML = `<div class="c-bubble">
@@ -262,51 +325,109 @@ function mostrarDetalleProducto(idProducto) {
 function request(method, parametro, body = null) {
 
     return new Promise((resolve, reject) => {
-
         let xhr = new XMLHttpRequest();
-
         xhr.open(method, `http://localhost:3000/${parametro}`);
-
         xhr.setRequestHeader("Content-type", "application/Json;charset=utf-8");
-
         xhr.response = "JSON";
-
-        xhr.send();
-
+        xhr.send(JSON.stringify(body));
         xhr.onload = () => {
-
-            if (xhr.status == 200) {
-                resolve(xhr.response);
+            if ((xhr.status == 200 || xhr.status == 201) && JSON.parse(xhr.response).length != 0) {
+                resolve(JSON.parse(xhr.response));
             } else {
                 reject(console.log("ERROR " + xhr.status + " " + xhr.statusText));
             }
         }
     }
-
     )
-
 };
 
-function verDetalleCarrito(carritoId) {
-    console.log("Detalle carrito - " + carritoId)
-}
-
-function realizarPago(carritoId) {
-    console.log("Pagar carrito - " + carritoId)
-}
-
-function recuperarCarrito(carritoId) {
-    console.log("Recuperar carrito - " + carritoId)
-}
-
-function borrarCarrito(carritoId) {
-    console.log("Borrar carrito - " + carritoId)
-}
-
-let asignarEvento = function (className, event, callback) {
-    let botones = document.getElementsByClassName(className);
-    for (let boton of botones) {
-        let id = boton.parentNode.parentNode.id.split("-")[1];
-        boton.addEventListener(event, () => callback(id));
+function registrarUsuario() {
+    let formData = new FormData(document.forms.formRegistro);
+    let newUser = {};
+    for (const [key, value] of formData) {
+        newUser[key] = value;
     }
+
+    if (!newUser["nombre"] || !newUser["apellidos"] || !newUser["correo"] || !newUser["password"] || !newUser["confirmPassword"]) {
+        alert("Por favor rellene todos los campos");
+        return;
+    }
+    if (newUser["password"] !== newUser["confirmPassword"]) {
+        alert("Las contraseñas no coinciden");
+        return;
+    }
+
+    delete newUser.confirmPassword;
+    newUser.nombre = newUser.nombre + " " + newUser.apellidos
+    delete newUser.apellidos;
+
+    request("POST", "usuarios", newUser);
+}
+
+function iniciarSesion(e) {
+    e.preventDefault();
+
+    let formData = new FormData(document.forms.formLogin);
+    let user = {};
+    for (const [key, value] of formData) {
+        user[key] = value;
+
+    }
+    if (!user['usuario'] || !user['password']) {
+        alert("Por favor rellene todos los campos");
+        return;
+    }
+
+    request("GET", "login/" + user.usuario)
+        .then(u => {
+            usuario = u[0];
+            if (usuario.password == user.password) {
+                isLogin = true;
+                activeUser = new User(usuario.id, usuario.nombre, usuario.correo);
+                changeLogInInterface(activeUser);
+            } else {
+                alert("Contraseña incorrecta")
+            }
+        }).catch(e => { alert("El usuario no existe") })
+}
+
+function changeLogInInterface(user) {
+    let dialog = document.getElementById("dialog");
+    dialog.close();
+
+    dialog.classList = "c-modal c-modal--xsmall miCuenta";
+    dialog.innerHTML = `<div class="c-bubble">
+                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                                <div class="c-title"><i class="c-icon fa-solid fa-user"></i> Mi cuenta</div>
+                                <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                            </div>
+                            <label class="c-label" for="nombre">Nombre</label>
+                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between">
+                                <input id="nombre" class="c-input c-input--w-80" name="nombre" type="text" value="${user.nombre}">
+                                <button id="cambiarNombre" class="c-button">Editar</button>
+                            </div>
+                            <label class="c-label" for="correo">Correo electrónico</label>
+                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between">
+                                <input id="correo" class="c-input c-input--w-80" name="correo" type="text" value="${user.correo}">
+                                <button id="cambiarCorreo" class="c-button">Editar</button>
+                            </div>
+                            <hr class="g--margin-vertical-8 g--color-principal-1">
+                            <label class="c-label" for="password">Contraseña</label>
+                            <input id="password" class="c-input c-input--w-100" type="password" name="password"
+                                placeholder="Escriba su nueva contraseña">
+                            <label class="c-label" for="confirmPassword">Confirmar contraseña</label>
+                            <input id="confirmPassword" class="c-input c-input--w-100" type="password"
+                                name="confirmPassword" placeholder="Confirme su  nueva contraseña">
+                            <div class="l-flex l-flex--justify-content-end">
+                                <button id="cambiarCorreo" class="c-button">Confirmar nueva contraseña</button>
+                            </div>
+                            <hr class="g--margin-vertical-8 g--color-principal-1">
+                            <div>
+                                <i id="cart-list_icon" class="c-icon fa-solid fa-list"></i>
+                                Historial de carritos
+                            </div>
+                        </div>`;
+    fadeAnimation("miCuenta");
+    document.getElementById("cart-list_icon").addEventListener("click", modalHistorialCarrito);
+    dialog.showModal();
 }

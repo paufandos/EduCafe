@@ -1,4 +1,4 @@
-    {
+{
         "productos": [
             {
                 "id": "1",
@@ -308,42 +308,30 @@
             }
         ],
         "usuarios": [
-            {
-                "id": "1",
-                "nombre": "root",
-                "email": "fulano@hotmail.com",
-                "contraseña": "root"
-            },
-            {
-                "id": "2",
-                "nombre": "pau",
-                "email": "mengano@hotmail.com",
-                "contraseña": "root"
-            },
-            {
-                "id": "3",
-                "nombre": "javi",
-                "email": "trayano@hotmail.com",
-                "contraseña": "root"
-            },
-            {
-                "id": "4",
-                "nombre": "yasmina",
-                "email": "mundano@hotmail.com",
-                "contraseña": "root"
-            },
-            {
-                "id": "5",
-                "nombre": "elena",
-                "email": "vendano@hotmail.com",
-                "contraseña": "root"
-            },
-            {
-                "id": "6",
-                "nombre": "jose luis",
-                "email": "troyano@hotmail.com",
-                "contraseña": "root"
-            }
+          {
+            "nombre": "w w",
+            "correo": "w",
+            "password": "w",
+            "id": "xoSb9E7"
+          },
+          {
+            "nombre": "Jose Coloma Tormo",
+            "correo": "a@a.com",
+            "password": "1111",
+            "id": "gbPUSG3"
+          },
+          {
+            "nombre": "Javier Del Moral",
+            "correo": "b@b.com",
+            "password": "qwerty",
+            "id": "bm48mCG"
+          },
+          {
+            "nombre": "Elena Monleón Garcerá",
+            "correo": "a@a.com",
+            "password": "1234",
+            "id": "wJJ5_B1"
+          }
         ],
         "carritos": [
             {

@@ -1248,6 +1248,10 @@ table {
   display: inline-block;
   width: 100%;
 }
+.c-input--w-80 {
+  display: inline-block;
+  width: 80%;
+}
 .c-input:focus {
   outline: 0 !important;
 }

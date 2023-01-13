@@ -18,6 +18,10 @@
         display: inline-block;
         width: 100%;
     }
+    &--w-80{
+        display: inline-block;
+        width: 80%;
+    }
 
     &:focus{
         outline: 0 !important;
