@@ -4,13 +4,16 @@ let activeUser;
 
 window.onload = () => {
     document.getElementById("login_icon").onclick = modalLogin;
-    document.getElementById("cart_icon").onclick = verCarrito();
-    document.getElementById("cart-list_icon").onclick = () => historialCarritos(1);
+    document.getElementById("cart_icon").onclick = verCarrito;
 
     addRefreshEvents();
     mostrarCategorias();
 
 };
+
+function verCarrito() {
+    alert("El carrito está vacío")
+}
 
 function addRefreshEvents() {
     let refreshElements = document.getElementsByClassName("refresh");
@@ -252,8 +255,7 @@ function historialCarritos(id_usuario) {
     const parametro = "historial_carritos/" + id_usuario;
     const method = "get";
     request(method, parametro, null)
-        .then(response => {
-            let historialCarritos = JSON.parse(response)
+        .then(historialCarritos => {
             Array.from(historialCarritos).forEach(carrito => {
                 //Pintamos todos los carritos
                 modalHistorialCarrito.innerHTML += `<div id="carrito-${carrito.id}" class="c-cart-list l-flex l-flex--align-items-center">
@@ -428,6 +430,30 @@ function changeLogInInterface(user) {
                             </div>
                         </div>`;
     fadeAnimation("miCuenta");
-    document.getElementById("cart-list_icon").addEventListener("click", modalHistorialCarrito);
+    document.getElementById("cart-list_icon").addEventListener("click", () => historialCarritos(user.id));
     dialog.showModal();
+}
+
+let asignarEvento = function (className, event, callback) {
+    let botones = document.getElementsByClassName(className);
+    for (let boton of botones) {
+        let id = boton.parentNode.parentNode.id.split("-")[1];
+        boton.addEventListener(event, () => callback(id));
+    }
+}
+
+function verDetalleCarrito(carritoId) {
+    console.log("Detalle carrito - " + carritoId)
+}
+
+function realizarPago(carritoId) {
+    console.log("Pagar carrito - " + carritoId)
+}
+
+function recuperarCarrito(carritoId) {
+    console.log("Recuperar carrito - " + carritoId)
+}
+
+function borrarCarrito(carritoId) {
+    console.log("Borrar carrito - " + carritoId)
 }
