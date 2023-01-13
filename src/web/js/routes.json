@@ -1,0 +1,4 @@
+{
+"/historial_carritos/:id":"/carritos?id_usuario=:id",
+"/productos/categoria/:id":"/productos?id_categoria=:id"
+}
