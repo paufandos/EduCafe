@@ -1,48 +1,48 @@
 class Carrito{
-	constructor(id){
+	constructor(id, fecha, estado=null, id_usuario=null, productos=[]){
 		this.id=id;
-		this.listaCarrito=[];
-						
+		this.fecha=fecha;
+		this.estado=estado;
+		this.id_usuario=id_usuario;
+		this.productos=productos;
 	}
 						
 	anyadeArticulo(articulo){	
-		let codigo=articulo.codigo;
-		if(this.listaCarrito.find(e=> e.codigo==codigo)){
-			articulo.unidades++;
-			//this.modificaUnidades(codigo,1)
+		let pos=this.productos.findIndex(e=> e.id==articulo.id);
+		if(pos>=0){
+			this.productos[pos].unidades++
 		}else{
 			articulo.unidades=1;
-			this.listaCarrito.push(articulo);
-			//console.log(this.listaCarrito);
+			this.productos.push(articulo);
 		}
-		
-		}			
+	}			
 				
-	borraArticulo(codigo){		
-		console.log(codigo);
-		let indice = this.listaCarrito.findIndex(e=> e.codigo==codigo)
-		this.listaCarrito.splice(indice,1);
+	borraArticulo(id){		
+		let indice = this.productos.findIndex(e=> e.id==id)
+		this.productos.splice(indice,1);
 		this.actualizarCarrito();
 	}
 	
-	modificaUnidades(codigo,n){
-		let articulo = this.listaCarrito.find(e=> e.codigo==codigo)
-		console.log(articulo)
+	modificaUnidades(id,n){
+		let pos = this.productos.findIndex(e=> e.id==id)
 		if(n=="suma"){
-			articulo.unidades++;
-		}else if(n=="resta"&& articulo.unidades>1){
-			articulo.unidades--;			
+			this.productos[pos].unidades++
+		}else if(n=="resta"&& this.productos[pos].unidades>1){
+			this.productos[pos].unidades--	
 		}else{
-			this.borraArticulo(articulo.codigo);
+			this.borraArticulo(id);
 		}
 		this.actualizarCarrito();
-	}	
+
+
+	}
 			
 	actualizarCarrito(){	
-		if(this.listaCarrito!=0){		
+		if(this.productos!=0){		
 			let precioTotal=0;				
 			let dialog = document.getElementById("dialog");
-			dialog.close();
+			//dialog.close();
+			dialog.innerHTML="";
 			dialog.classList = "c-modal c-modal--large carritoModal";
 			let codigo="";
 				codigo+=` 
@@ -59,38 +59,49 @@ class Carrito{
                 <div>Unidades</div>
                 <div>Total</div>
                 <div></div>
-                </div>
-                <div class="c-cart-row">`;
-				this.listaCarrito.forEach(element => {
+                </div>`;
+                
+				this.productos.forEach(element => {
 				codigo+=`
-					<img src="./assets/img/fotosProductos/${element.codigo}" class="c-cart-row__img">
+				<div class="c-cart-row" id="row-${element.id}">
+					<img src="./assets/img/fotosProductos/producto_${element.id}.jpg" class="c-cart-row__img">
 					<div>${element.nombre}</div>
 					<div>${element.descripcion}</div>
-					<div>${element.precio+"€"}</div>
+					<div>${element.precio.toFixed(2)}€</div>
 					<div>${element.unidades}</div>
-					<div>${element.precio*element.unidades+"€"}</div>
+					<div>${(element.precio*element.unidades).toFixed(2)}€</div>
 					<div>
 						<button class="c-button mas" >+</button>
 						<button class="c-button menos">-</button>
 						<button class="c-button c-button--terciario eliminar">Eliminar</button>
-					</div>`	
+					</div>
+				</div>`	
 					precioTotal+=element.precio*element.unidades;
-			});
-			codigo+=`</div>`;			
-
+			});		
 				//let botones=document.getElementsByClassName("borrar");
-				//añadir click a los botones y asociarle los metodos
+
 				codigo+=`<div class="c-cart-row__footer l-flex l-flex--align-items-center l-flex--justify-content-space-between">
-                <div class="c-title">${precioTotal}</div>
+                <div class="c-title">Importe: ${precioTotal.toFixed(2)}€</div>
                 <button id="pago" class="c-button">Confirmar carrito</button>
                 </div>`
 				dialog.innerHTML+=codigo;
-
 				fadeAnimation("carritoModal");
+
+				Array.from(document.getElementsByClassName("mas")).forEach(boton=> boton.addEventListener("click",()=>{this.modificaUnidades(boton.parentNode.parentNode.id.split("-")[1],"suma")}))
+				Array.from(document.getElementsByClassName("menos")).forEach(boton=> boton.addEventListener("click",()=>{this.modificaUnidades(boton.parentNode.parentNode.id.split("-")[1], "resta")}))
+				Array.from(document.getElementsByClassName("eliminar")).forEach(boton=> boton.addEventListener("click",()=>{this.borraArticulo(boton.parentNode.parentNode.id.split("-")[1])}))
+				
     			document.getElementById("pago").onclick = modalPago;
-    			dialog.showModal();
+				if (!dialog.open) {
+					dialog.showModal();
+				}
+    			
 		}else{
 			dialog.close();
 		}
-	}			
+	}
+	
+	
 }
+
+

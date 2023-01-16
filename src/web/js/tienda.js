@@ -1,18 +1,49 @@
 const ESTADO_CARRITO = { 0: "Pago realizado", 1: "Pendiente de pago", 2: "Pendiente de pago (actual)" };
 let isLogin = false;
 let activeUser;
+let carrito;
 
 window.onload = () => {
+    Date.prototype.getFormattedDate = function () {
+        let dia = this.getDate() < 10 ? "0" + this.getDate() : this.getDate();
+        let mes = this.getMonth() < 10 ? "0" + this.getMonth() : this.getMonth();
+        return dia + "-" + mes + "-" + this.getFullYear()
+    }
+
+    carrito = new Carrito(Date.now(), new Date().getFormattedDate());
+
     document.getElementById("login_icon").onclick = modalLogin;
     document.getElementById("cart_icon").onclick = verCarrito;
 
     addRefreshEvents();
     mostrarCategorias();
 
+
 };
 
 function verCarrito() {
-    alert("El carrito está vacío")
+    if (isLogin) {
+        request("GET", "carritoActual/" + activeUser.id)
+            .then(c => {
+                carrito = new Carrito(c.id, c.fecha, c.estado, c.id_usuario, c.productos)
+                carrito.actualizarCarrito()
+            })
+
+    } else if (carrito.productos.length != 0) {
+        carrito.actualizarCarrito();
+        console.log(carrito)
+    } else {
+        alert("carrito vacio")
+    }
+
+}
+
+function ponArticuloEnCarrito(id) {
+    request("GET", "productos/" + id)
+        .then(p => {
+            carrito.anyadeArticulo(p)
+        })
+        .catch(e => console.log(e + " no se ha encontrado articulo"))
 }
 
 function addRefreshEvents() {
@@ -56,6 +87,11 @@ function mostrarCategorias() {
 
 }
 
+/*function alPulsarCarrito(){
+    let classIcon = document.getElementsByClassName("c-icon")
+    classIcon.innerHTML="c-icon--alternativo"
+}*/
+
 function mostrarProductos(id) {
     //declaracion de parametros que pasaremos al request
     const parametro = "productos";
@@ -81,7 +117,7 @@ function mostrarProductos(id) {
                                         </div>
                                         <div class="c-item__price">${p.precio.toFixed(2)} €</div>
                                         <div class="c-item__icon c-item__icon--right">
-                                            <i class="c-icon c-icon--alternativo fa-solid fa-cart-plus" ></i>
+                                            <i id="producto-${p.id}" class="c-icon c-icon--alternativo fa-solid fa-cart-plus" ></i>
                                         </div>
                                     </div>
                                 </div>`;
@@ -95,20 +131,16 @@ function mostrarProductos(id) {
 
             let infoIcon = layout.getElementsByClassName("fa-circle-info");
             for (let icon of infoIcon) {
-                icon.onclick = () => mostrarDetalleProducto(id, icon.id)
+                let id = icon.id;
+                icon.onclick = () => mostrarDetalleProducto(id)
             }
+
+            let articulos = layout.getElementsByClassName("fa-cart-plus");
+            for (let art of articulos) {
+                let id = art.id.split("-")[1]
+                art.addEventListener('click', () => { ponArticuloEnCarrito(id) });
+            };
         });
-
-    let images = layout.getElementsByClassName("c-item__img");
-    for (let img of images) {
-        let rutaImg = "url('./assets/img/fotosProductos/producto_" + img.id + ".jpg')";
-        img.style.backgroundImage = "linear-gradient(to bottom, rgba(255, 255, 255, 0),80%, rgb(227, 219, 206))," + rutaImg;
-    }
-
-    let infoIcon = layout.getElementsByClassName("fa-circle-info");
-    for (let icon of infoIcon) {
-        icon.onclick = () => mostrarDetalleProducto(icon.id)
-    }
 
 }
 
@@ -140,9 +172,9 @@ function modalLogin() {
                         <div class="l-columns">
                             <form id="formLogin" class="c-bubble">
                                 <div class="c-title">Inicio de sesión</div>
-                                <label class="c-label" for="usuario">Usuario</label>
+                                <label class="c-label" for="usuario">Email</label>
                                 <input id="usuario" class="c-input c-input--w-100" name="usuario" type="text"
-                                    placeholder="Escribe aquí tu nombre de usuario">
+                                    placeholder="Escribe aquí tu correo">
 
                                 <label class="c-label" for="password">Contraseña</label>
                                 <input id="password" class="c-input c-input--w-100" name="password" type="password"
@@ -183,23 +215,23 @@ function modalRegistro() {
                             <form id="formRegistro">
                                 <label class="c-label" for="nombre">Nombre</label>
                                 <input id="nombre" class="c-input c-input--w-100" name="nombre" type="text"
-                                    placeholder="Escriba su nombre">
+                                    placeholder="Escribe tu nombre">
 
                                 <label class="c-label" for="apellidos">Apellidos</label>
                                 <input id="apellidos" class="c-input c-input--w-100" type="text" name="apellidos"
-                                    placeholder="Escriba sus apellidos">
+                                    placeholder="Escribe tus apellidos">
 
                                 <label class="c-label" for="correo">Correo electrónico</label>
                                 <input id="correo" class="c-input c-input--w-100" name="correo" type="text"
-                                    placeholder="Escriba su correo electrónico">
+                                    placeholder="Escribe tu correo electrónico">
 
                                 <label class="c-label" for="password">Contraseña</label>
                                 <input id="password" class="c-input c-input--w-100" type="password" name="password"
-                                    placeholder="Escriba su contraseña">
+                                    placeholder="Escribe tu contraseña">
 
                                 <label class="c-label" for="confirmPassword">Confirmar contraseña</label>
                                 <input id="confirmPassword" class="c-input c-input--w-100" type="password"
-                                    name="confirmPassword" placeholder="Confirme su contraseña">
+                                    name="confirmPassword" placeholder="Confirma tu contraseña">
                             </form>
                             <div class="g--text-align-right g--margin-top-10">
                                 <button id="botonRegistro" class="c-button">Confirmar registro</button>
@@ -297,31 +329,36 @@ function mostrarDetalleProducto(idProducto) {
         //resolve de la promesa
         .then(listadoProductos => {
             let articulo = listadoProductos.find(p => p.id == idProducto);
-
             dialog.classList = "c-modal c-modal--small detalleProductoModal";
             dialog.innerHTML = `<div class="c-bubble">
-            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
-            <div class="c-title">${articulo.nombre}</div>
-            <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
-            </div>
-            <div class="l-flex l-flex--justify-content-center">
-            <img src="assets/img/fotosProductos/producto_${articulo.id}.jpg" class="c-img c-img--small">
-            <div
-                class="c-bubble c-bubble--dark g--margin-horizontal-5 l-flex l-flex--direction-column l-flex--justify-content-space-between">
-                <div class="c-text">${articulo.descripcion}</div>
-                <div class="l-flex l-flex--justify-content-space-between">
-                <div class="c-title c-title--alternativo-secundario c-title--medium">${articulo.precio.toFixed(2)} €</div>
-                <button class="c-button"><i class="fa-solid fa-cart-plus g--margin-right-4"></i>Añadir</button>
-                </div>
-            </div>
-            </div>
-        </div>`;
+                                    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                                        <div class="c-title">${articulo.nombre}</div>
+                                        <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                                    </div>
+                                    <div class="l-flex l-flex--justify-content-center">
+                                        <img src="assets/img/fotosProductos/producto_${articulo.id}.jpg" class="c-img c-img--small">
+                                        <div id="articulo-${articulo.id}" class="c-bubble c-bubble--dark g--margin-horizontal-5 l-flex l-flex--direction-column l-flex--justify-content-space-between">
+                                            <div class="c-text">${articulo.descripcion}</div>
+                                            <div class="l-flex l-flex--justify-content-space-between">
+                                                <div class="c-title c-title--alternativo-secundario c-title--medium">${articulo.precio.toFixed(2)} €</div>
+                                                <button class="c-button add"><i class="fa-solid fa-cart-plus g--margin-right-4"></i>Añadir</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+
+            /* let carroIcon = layout.getElementsByClassName("fa-cart-plus");
+             let id = articulo.id;
+             carroIcon.onclick = () => ponArticuloEnCarrito(id); */
+            asignarEvento("add", "click", ponArticuloEnCarrito);
             fadeAnimation("detalleProductoModal");
             dialog.showModal();
         })
         .catch(error => {
             console.log("Error")
         });
+
+
 }
 
 function request(method, parametro, body = null) {
@@ -416,7 +453,7 @@ function changeLogInInterface(user) {
                             <hr class="g--margin-vertical-8 g--color-principal-1">
                             <label class="c-label" for="password">Contraseña</label>
                             <input id="password" class="c-input c-input--w-100" type="password" name="password"
-                                placeholder="Escriba su nueva contraseña">
+                                placeholder="Escribe su nueva contraseña">
                             <label class="c-label" for="confirmPassword">Confirmar contraseña</label>
                             <input id="confirmPassword" class="c-input c-input--w-100" type="password"
                                 name="confirmPassword" placeholder="Confirme su  nueva contraseña">
@@ -434,14 +471,6 @@ function changeLogInInterface(user) {
     dialog.showModal();
 }
 
-let asignarEvento = function (className, event, callback) {
-    let botones = document.getElementsByClassName(className);
-    for (let boton of botones) {
-        let id = boton.parentNode.parentNode.id.split("-")[1];
-        boton.addEventListener(event, () => callback(id));
-    }
-}
-
 function verDetalleCarrito(carritoId) {
     console.log("Detalle carrito - " + carritoId)
 }
@@ -456,4 +485,12 @@ function recuperarCarrito(carritoId) {
 
 function borrarCarrito(carritoId) {
     console.log("Borrar carrito - " + carritoId)
+}
+
+let asignarEvento = function (className, event, callback, optional = null) {
+    let botones = document.getElementsByClassName(className);
+    for (let boton of botones) {
+        let id = boton.parentNode.parentNode.id.split("-")[1];
+        boton.addEventListener(event, () => callback(id, optional));
+    }
 }
