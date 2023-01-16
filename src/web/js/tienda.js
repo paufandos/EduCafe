@@ -3,7 +3,6 @@ let activeUser
 let carrito;
 
 window.onload = () => {
-
     localStorage.clear()
     if (!localStorage.getItem('carrito')) {
         window.localStorage.setItem("carrito", JSON.stringify(new Carrito(Date.now(), new Date().getFormattedDate())));
@@ -19,30 +18,8 @@ window.onload = () => {
     mostrarCategorias();
 };
 
-function verCarrito() {
-    if (carrito.productos.length != 0) {
-        carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")));
-        carrito.actualizarCarrito()
-        window.localStorage.setItem("carrito", JSON.stringify(carrito))
-    } else {
-        alert("carrito vacio")
-    }
-}
 
-function anyadirArticulo(id) {
-    request("GET", "productos/" + id)
-        .then(p => {
-            carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")))
-            let nuevoArticulo = {
-                "id_producto": p.id,
-                "cantidad": 1
-            }
-            carrito.anyadeArticulo(nuevoArticulo);
-            window.localStorage.setItem("carrito", JSON.stringify(carrito))
-        })
-        .catch(e => console.log(e + " no se ha encontrado articulo"))
-}
-
+//TIENDA
 function mostrarCategorias() {
     //declaracion de parametros que pasaremos al request
     const parametro = "categorias";
@@ -113,55 +90,6 @@ function mostrarProductos(id) {
 
 }
 
-function historialCarritos(id_usuario) {
-    let dialog = document.getElementById("dialog");
-    dialog.close();
-
-    //Añadimos el encabezado del modal a la etiqueta dialog
-    dialog.classList = "c-modal c-modal--large historialCarritoModal";
-    dialog.innerHTML = `<div id='modalHistorialCarrito' class='c-bubble'>
-                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
-                                <div class="c-title">Listado carritos</div>
-                                <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
-                            </div>
-                        </div>`;
-
-    //Cogemos el contenedor donde irán todos los carritos
-    let modalHistorialCarrito = document.getElementById("modalHistorialCarrito");
-
-    //Preparamos y ejecutamos la petición del historial de carritos al servidor
-    const parametro = "historial_carritos/" + id_usuario;
-    const method = "get";
-    request(method, parametro, null)
-        .then(historialCarritos => {
-            Array.from(historialCarritos).forEach(carrito => {
-                //Pintamos todos los carritos
-                modalHistorialCarrito.innerHTML += `<div class="c-cart-list l-flex l-flex--align-items-center">
-                                                        <div id="carrito-${carrito.id}" class="c-cart-list__title-cart">
-                                                            <i class="c-icon c-icon--small fa-solid fa-eye"></i>
-                                                            Carrito ${carrito.id}
-                                                        </div>
-                                                        <div id="carrito-${carrito.id}" class="c-cart-list__item c-cart-list__item--right">${ESTADO_CARRITO[carrito.estado]}</div>`;
-                if (carrito.estado != 0) {
-                    document.getElementById("carrito-" + carrito.id).innerHTML += `<div class="c-cart-list__item"><button class="c-button pagar">Pagar</button></div>
-                                                        <div class="c-cart-list__item"><button class="c-button recuperar">Recuperar</button></div>
-                                                        <div class="c-cart-list__item"><button class="c-button c-button--danger borrar">Borrar</button></div>                                                        
-                                                    </div>
-                                                </div>`;
-                };
-            });
-            //Asignamos las respectivas funciones a los botones de los carritos
-            asignarEvento("fa-eye", "click", verDetalleCarrito);
-            asignarEvento("pagar", "click", realizarPago);
-            asignarEvento("recuperar", "click", recuperarCarrito);
-            asignarEvento("borrar", "click", borrarCarrito);
-
-            //Añadimos la animación de salida al modal
-            animacionSalidaModal("historialCarritoModal");
-            dialog.showModal();
-        });
-}
-
 function mostrarDetalleProducto(idProducto) {
     let dialog = document.getElementById("dialog");
     dialog.close();
@@ -202,6 +130,40 @@ function mostrarDetalleProducto(idProducto) {
         });
 
 
+}
+
+function carritoSerialize(carrito) {
+    return new Carrito(carrito.id, carrito.fecha, carrito.estado, carrito.id_usuario, carrito.productos)
+}
+
+function verCarrito() {
+    if (carrito.productos.length != 0) {
+        carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")));
+        carrito.actualizarCarrito()
+        window.localStorage.setItem("carrito", JSON.stringify(carrito))
+    } else {
+        alert("carrito vacio")
+    }
+}
+
+function anyadirArticulo(id) {
+    request("GET", "productos/" + id)
+        .then(p => {
+            carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")))
+            let nuevoArticulo = {
+                "id_producto": p.id,
+                "cantidad": 1
+            }
+            carrito.anyadeArticulo(nuevoArticulo);
+            window.localStorage.setItem("carrito", JSON.stringify(carrito))
+        })
+        .catch(e => console.log(e + " no se ha encontrado articulo"))
+}
+
+
+//USUARIO
+function userSerialize(user) {
+    return new User(user.id, user.nombre, user.correo)
 }
 
 function registrarUsuario() {
@@ -296,12 +258,99 @@ function changeLogInInterface(user) {
     dialog.showModal();
 }
 
+function historialCarritos(id_usuario) {
+    let dialog = document.getElementById("dialog");
+    dialog.close();
+
+    //Añadimos el encabezado del modal a la etiqueta dialog
+    dialog.classList = "c-modal c-modal--large historialCarritoModal";
+    dialog.innerHTML = `<div id='modalHistorialCarrito' class='c-bubble'>
+                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                                <div class="c-title">Listado carritos</div>
+                                <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                            </div>
+                        </div>`;
+
+    //Cogemos el contenedor donde irán todos los carritos
+    let modalHistorialCarrito = document.getElementById("modalHistorialCarrito");
+
+    //Preparamos y ejecutamos la petición del historial de carritos al servidor
+    const parametro = "historial_carritos/" + id_usuario;
+    const method = "get";
+    request(method, parametro, null)
+        .then(historialCarritos => {
+            Array.from(historialCarritos).forEach(carrito => {
+                //Pintamos todos los carritos
+                modalHistorialCarrito.innerHTML += `<div id="cartRow-${carrito.id}" class="c-cart-list l-flex l-flex--align-items-center">
+                                                        <div id="cartList-${carrito.id}" class="c-cart-list__title-cart">
+                                                            <i class="c-icon c-icon--small fa-solid fa-eye"></i>
+                                                            Carrito ${carrito.id}
+                                                        </div>
+                                                        <div class="c-cart-list__item c-cart-list__item--right">${ESTADO_CARRITO[carrito.estado]}</div>`;
+                if (carrito.estado != 0) {
+                    document.getElementById("cartRow-" + carrito.id).innerHTML += `
+                                                        <div id="cartPay-${carrito.id}" class="c-cart-list__item">
+                                                            <button class="c-button pagar">Pagar</button>
+                                                        </div>
+                                                        <div id="cartRecuperar-${carrito.id}" class="c-cart-list__item">
+                                                            <button class="c-button recuperar">Recuperar</button>
+                                                        </div>
+                                                        <div id="cartDelete-${carrito.id}" class="c-cart-list__item">
+                                                            <button class="c-button c-button--danger borrar">Borrar</button>
+                                                        </div>                                                        
+                                                    </div>
+                                                </div>`;
+                };
+            });
+            //Asignamos las respectivas funciones a los botones de los carritos
+            asignarEvento("fa-eye", "click", verDetalleCarrito);
+            asignarEvento("pagar", "click", modalPago);
+            asignarEvento("recuperar", "click", recuperarCarrito);
+            asignarEvento("borrar", "click", borrarCarrito);
+
+            //Añadimos la animación de salida al modal
+            animacionSalidaModal("historialCarritoModal");
+            dialog.showModal();
+        });
+}
+
 function verDetalleCarrito(carritoId) {
     console.log("Detalle carrito - " + carritoId)
 }
 
 function realizarPago(carritoId) {
-    console.log("Pagar carrito - " + carritoId)
+    let formData = new FormData(document.forms.formPago);
+    let newPay = {};
+    for (const [key, value] of formData) {
+        newPay[key] = value;
+    }
+
+    if (!newPay["nombreTarjeta"] || !newPay["numeroTarjeta"] || !newPay["mesTarjeta"] || !newPay["anyoTarjeta"] || !newPay["codigoSeguridad"]) {
+        alert("Por favor rellene todos los campos");
+        return;
+    }
+
+    newPay.fechaCaducidad = newPay.mesTarjeta + "/" + newPay.anyoTarjeta
+    newPay.id_carrito = carritoId;
+    delete newPay.mesTarjeta;
+    delete newPay.anyoTarjeta;
+
+    request("POST", "pagos", newPay)
+        .then(() => {
+            console.log("pagado")
+            request("GET", "carrito/" + carritoId)
+                .then((carrito) => {
+                    carrito.estado = 0
+                    console.log(carrito)
+                    request("PUT", "carritos/" + carritoId, carrito)
+                        .then(carrito =>
+                            alert("carrito pagado -> " + carrito.id)
+                        )
+                        .catch(e => console.log(e));
+                })
+                .catch(e => console.log(e));
+        })
+        .catch(console.log("pagado"));;
 }
 
 function recuperarCarrito(carritoId) {
@@ -310,12 +359,4 @@ function recuperarCarrito(carritoId) {
 
 function borrarCarrito(carritoId) {
     console.log("Borrar carrito - " + carritoId)
-}
-
-function carritoSerialize(carrito) {
-    return new Carrito(carrito.id, carrito.fecha, carrito.estado, carrito.id_usuario, carrito.productos)
-}
-
-function userSerialize(user) {
-    return new User(user.id, user.nombre, user.correo)
 }

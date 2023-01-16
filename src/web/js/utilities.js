@@ -6,10 +6,7 @@ function request(method, parametro, body = null) {
     xhr.response = "JSON";
     xhr.send(JSON.stringify(body));
     xhr.onload = () => {
-      if (
-        (xhr.status == 200 || xhr.status == 201) &&
-        JSON.parse(xhr.response).length != 0
-      ) {
+      if ((xhr.status == 200 && JSON.parse(xhr.response).length != 0) || xhr.status == 201) {
         resolve(JSON.parse(xhr.response));
       } else {
         reject(console.log("ERROR " + xhr.status + " " + xhr.statusText));

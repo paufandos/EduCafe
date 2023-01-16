@@ -84,7 +84,7 @@ function modalRegistro() {
     dialog.showModal();
 }
 
-function modalPago() {
+function modalPago(id_carrito) {
     let dialog = document.getElementById("dialog");
     dialog.close();
 
@@ -94,8 +94,8 @@ function modalPago() {
                                 <div class="c-title">Formulario de pago</div>
                                 <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
                             </div>
-                            <form>
-                                <label class="c-label" for="usuario">Nombre de la Tarjeta</label>
+                            <form id="formPago">
+                                <label class="c-label" for="nombreTarjeta">Nombre de la Tarjeta</label>
                                 <input id="nombreTarjeta" class="c-input c-input--w-100" name="nombreTarjeta" type="text" size="47"
                                     placeholder="Tal y como aparece en la tarjeta">
                             
@@ -125,12 +125,13 @@ function modalPago() {
                                     <i class="fa-brands fa-cc-apple-pay fa-3x"></i>
                                     <i class="fa-brands fa-cc-amazon-pay fa-3x"></i>
                                 </div>
-                                <div class="g--text-align-right g--margin-top-10">
-                                    <button class="c-button">Confirmar pago</button>
+                                <div id="carrito-${id_carrito}" class="g--text-align-right g--margin-top-10">
+                                    <button class="c-button confirmarPago">Confirmar pago</button>
                                 </div>
                             </form>
                         </div>`;
 
     animacionSalidaModal("pagoModal");
+    asignarEvento("confirmarPago", "click", realizarPago)
     dialog.showModal();
 }
