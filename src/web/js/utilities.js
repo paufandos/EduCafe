@@ -1,9 +1,17 @@
+function addRefreshEvents() {
+  let refreshElements = document.getElementsByClassName("refresh");
+  for (let element of refreshElements) {
+    element.addEventListener("click", () => {
+      location.reload();
+    });
+  }
+}
+
 function request(method, parametro, body = null) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
     xhr.open(method, `http://localhost:3000/${parametro}`);
-    xhr.setRequestHeader("Content-type", "application/Json;charset=utf-8");
-    xhr.response = "JSON";
+    xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
     xhr.send(JSON.stringify(body));
     xhr.onload = () => {
       if ((xhr.status == 200 && JSON.parse(xhr.response).length != 0) || xhr.status == 201) {
@@ -13,15 +21,6 @@ function request(method, parametro, body = null) {
       }
     };
   });
-}
-
-function addRefreshEvents() {
-  let refreshElements = document.getElementsByClassName("refresh");
-  for (let element of refreshElements) {
-    element.addEventListener("click", () => {
-      location.reload();
-    });
-  }
 }
 
 function animacionSalidaModal(modalId) {

@@ -1,281 +1,281 @@
 {
   "productos": [
     {
-      "id": "1",
-      "id_categoria": "1",
+      "id": 1,
+      "id_categoria": 1,
       "nombre": "café solo",
       "descripcion": "Nuestro expresso más sabroso, con todo nuestro aroma de siempre. ¡Un clásico!",
       "precio": 0.7
     },
     {
-      "id": "2",
-      "id_categoria": "1",
+      "id": 2,
+      "id_categoria": 1,
       "nombre": "café cortado",
       "descripcion": "café con un poco de leche",
       "precio": 0.8
     },
     {
-      "id": "3",
-      "id_categoria": "1",
+      "id": 3,
+      "id_categoria": 1,
       "nombre": "café bombón",
       "descripcion": "café con leche condensada",
       "precio": 0.8
     },
     {
-      "id": "4",
-      "id_categoria": "1",
+      "id": 4,
+      "id_categoria": 1,
       "nombre": "vaso de leche",
       "descripcion": "vaso de leche fría o caliente",
       "precio": 1
     },
     {
-      "id": "5",
-      "id_categoria": "1",
+      "id": 5,
+      "id_categoria": 1,
       "nombre": "colacao",
       "descripcion": "vaso de leche con colacao",
       "precio": 1.1
     },
     {
-      "id": "6",
-      "id_categoria": "1",
+      "id": 6,
+      "id_categoria": 1,
       "nombre": "capuccino",
       "descripcion": "café estilo capuccino",
       "precio": 1.2
     },
     {
-      "id": "7",
-      "id_categoria": "1",
+      "id": 7,
+      "id_categoria": 1,
       "nombre": "café americano",
       "descripcion": "café largo",
       "precio": 0.8
     },
     {
-      "id": "8",
-      "id_categoria": "1",
+      "id": 8,
+      "id_categoria": 1,
       "nombre": "café del tiempo",
       "descripcion": "café con hielo y con limón",
       "precio": 1.2
     },
     {
-      "id": "9",
-      "id_categoria": "2",
+      "id": 9,
+      "id_categoria": 2,
       "nombre": "Coca-cola",
       "descripcion": "lata de 33 cl. coca-cola normal",
       "precio": 1.2
     },
     {
-      "id": "10",
-      "id_categoria": "2",
+      "id": 10,
+      "id_categoria": 2,
       "nombre": "Coca-cola zero",
       "descripcion": "lata de 33 cl. cocacola sin azúcar",
       "precio": 1.2
     },
     {
-      "id": "11",
-      "id_categoria": "2",
+      "id": 11,
+      "id_categoria": 2,
       "nombre": "Fanta naranja/limón",
       "descripcion": "lata de 33cl.",
       "precio": 1.2
     },
     {
-      "id": "12",
-      "id_categoria": "2",
+      "id": 12,
+      "id_categoria": 2,
       "nombre": "Aquarius naranja/limón",
       "descripcion": "botella de cristal de 33cl.",
       "precio": 1.3
     },
     {
-      "id": "13",
-      "id_categoria": "2",
+      "id": 13,
+      "id_categoria": 2,
       "nombre": "Monster verde",
       "descripcion": "lata de 50cl de monster verde.",
       "precio": 2
     },
     {
-      "id": "14",
-      "id_categoria": "2",
+      "id": 14,
+      "id_categoria": 2,
       "nombre": "Red Bull",
       "descripcion": "lata de 20cl de Red Bull original.",
       "precio": 2.2
     },
     {
-      "id": "15",
-      "id_categoria": "2",
+      "id": 15,
+      "id_categoria": 2,
       "nombre": "Zumos",
       "descripcion": "botella de 33cl. de varios sabores",
       "precio": 1.2
     },
     {
-      "id": "16",
-      "id_categoria": "2",
+      "id": 16,
+      "id_categoria": 2,
       "nombre": "Batidos",
       "descripcion": "Batidos de leche de varios sabores",
       "precio": 1.2
     },
     {
-      "id": "17",
-      "id_categoria": "2",
+      "id": 17,
+      "id_categoria": 2,
       "nombre": "Bifrutas",
       "descripcion": "zumos con leches con varios sabores",
       "precio": 1.2
     },
     {
-      "id": "18",
-      "id_categoria": "2",
+      "id": 18,
+      "id_categoria": 2,
       "nombre": "Agua pequeña.",
       "descripcion": "Botella de plástico de 33cl.",
       "precio": 0.8
     },
     {
-      "id": "19",
-      "id_categoria": "2",
+      "id": 19,
+      "id_categoria": 2,
       "nombre": "Agua con gas",
       "descripcion": "Botella de plástico de 33cl.",
       "precio": 0.8
     },
     {
-      "id": "20",
-      "id_categoria": "2",
+      "id": 20,
+      "id_categoria": 2,
       "nombre": "Agua grande 1.5l",
       "descripcion": "Botella de plástico de 1.5l",
       "precio": 1.2
     },
     {
-      "id": "21",
-      "id_categoria": "3",
+      "id": 21,
+      "id_categoria": 3,
       "nombre": "Bocadillo pequeño",
       "descripcion": "medio Bocadillo con varios ingredientes",
       "precio": 2
     },
     {
-      "id": "22",
-      "id_categoria": "3",
+      "id": 22,
+      "id_categoria": 3,
       "nombre": "Bocadillo completo",
       "descripcion": "Bocadillo entero con varios ingredientes a elegir",
       "precio": 2
     },
     {
-      "id": "23",
-      "id_categoria": "3",
+      "id": 23,
+      "id_categoria": 3,
       "nombre": "Pulga (montadito)",
       "descripcion": "Mini bocadillo con varios ingredientes",
       "precio": 1.7
     },
     {
-      "id": "24",
-      "id_categoria": "3",
+      "id": 24,
+      "id_categoria": 3,
       "nombre": "Paninis",
       "descripcion": "",
       "precio": 1.2
     },
     {
-      "id": "25",
-      "id_categoria": "4",
+      "id": 25,
+      "id_categoria": 4,
       "nombre": "Caracolas",
       "descripcion": "",
       "precio": 0.5
     },
     {
-      "id": "26",
-      "id_categoria": "4",
+      "id": 26,
+      "id_categoria": 4,
       "nombre": "MiniEnsaimadas",
       "descripcion": "",
       "precio": 0.5
     },
     {
-      "id": "27",
-      "id_categoria": "4",
+      "id": 27,
+      "id_categoria": 4,
       "nombre": "Caracola Grande",
       "descripcion": "",
       "precio": 1.2
     },
     {
-      "id": "28",
-      "id_categoria": "4",
+      "id": 28,
+      "id_categoria": 4,
       "nombre": "Triángulo de chocolate",
       "descripcion": "",
       "precio": 1.5
     },
     {
-      "id": "29",
-      "id_categoria": "5",
+      "id": 29,
+      "id_categoria": 5,
       "nombre": "Empanadilla de pisto",
       "descripcion": "",
       "precio": 1.2
     },
     {
-      "id": "30",
-      "id_categoria": "5",
+      "id": 30,
+      "id_categoria": 5,
       "nombre": "Empanadilla de espinacas",
       "descripcion": "",
       "precio": 1.5
     },
     {
-      "id": "31",
-      "id_categoria": "5",
+      "id": 31,
+      "id_categoria": 5,
       "nombre": "Napolitanas jamón/queso",
       "descripcion": "",
       "precio": 1.5
     },
     {
-      "id": "32",
-      "id_categoria": "5",
+      "id": 32,
+      "id_categoria": 5,
       "nombre": "Rosquilletas",
       "descripcion": "",
       "precio": 1.5
     },
     {
-      "id": "33",
-      "id_categoria": "6",
+      "id": 33,
+      "id_categoria": 6,
       "nombre": "Mikado",
       "descripcion": "",
       "precio": 1.2
     },
     {
-      "id": "34",
-      "id_categoria": "6",
+      "id": 34,
+      "id_categoria": 6,
       "nombre": "Oreo",
       "descripcion": "",
       "precio": 1.2
     },
     {
-      "id": "35",
-      "id_categoria": "6",
+      "id": 35,
+      "id_categoria": 6,
       "nombre": "Kinder blanco/negro",
       "descripcion": "",
       "precio": 1.2
     },
     {
-      "id": "36",
-      "id_categoria": "6",
+      "id": 36,
+      "id_categoria": 6,
       "nombre": "Krits",
       "descripcion": "",
       "precio": 1.2
     },
     {
-      "id": "37",
-      "id_categoria": "6",
+      "id": 37,
+      "id_categoria": 6,
       "nombre": "Filipinos",
       "descripcion": "",
       "precio": 1
     },
     {
-      "id": "38",
-      "id_categoria": "6",
+      "id": 38,
+      "id_categoria": 6,
       "nombre": "Halls",
       "descripcion": "",
       "precio": 1
     },
     {
-      "id": "39",
-      "id_categoria": "6",
+      "id": 39,
+      "id_categoria": 6,
       "nombre": "Chuches grande",
       "descripcion": "¡El bolsón! Y no de la comarca de la Tierra Media",
       "precio": 1
     },
     {
-      "id": "40",
-      "id_categoria": "6",
+      "id": 40,
+      "id_categoria": 6,
       "nombre": "Chuches pequeña",
       "descripcion": "",
       "precio": 0.5
@@ -283,62 +283,44 @@
   ],
   "categorias": [
     {
-      "id": "1",
+      "id": 1,
       "nombre": "cafés"
     },
     {
-      "id": "2",
+      "id": 2,
       "nombre": "bebidas"
     },
     {
-      "id": "3",
+      "id": 3,
       "nombre": "bocadillos"
     },
     {
-      "id": "4",
+      "id": 4,
       "nombre": "dulces"
     },
     {
-      "id": "5",
+      "id": 5,
       "nombre": "salados"
     },
     {
-      "id": "6",
+      "id": 6,
       "nombre": "snacks"
     }
   ],
   "usuarios": [
     {
+      "id": 1,
       "nombre": "w w",
       "correo": "w",
-      "password": "w",
-      "id": "1"
-    },
-    {
-      "nombre": "Jose Coloma Tormo",
-      "correo": "a@a.com",
-      "password": "1111",
-      "id": "gbPUSG3"
-    },
-    {
-      "nombre": "Javier Del Moral",
-      "correo": "b@b.com",
-      "password": "qwerty",
-      "id": "bm48mCG"
-    },
-    {
-      "nombre": "Elena Monleón Garcerá",
-      "correo": "a@a.com",
-      "password": "1234",
-      "id": "wJJ5_B1"
+      "password": "w"
     }
   ],
   "carritos": [
     {
-      "id": "1",
+      "id": 1,
       "fecha": "01-02-2003",
       "estado": 0,
-      "id_usuario": "1",
+      "id_usuario": 1,
       "productos": [
         {
           "id_producto": 1,
@@ -347,10 +329,10 @@
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "fecha": "01-02-2003",
       "estado": 0,
-      "id_usuario": "1",
+      "id_usuario": 1,
       "productos": [
         {
           "id_producto": 1,
@@ -359,10 +341,46 @@
       ]
     },
     {
-      "id": "3",
+      "id": 3,
+      "fecha": "01-02-2003",
+      "estado": 0,
+      "id_usuario": 1,
+      "productos": [
+        {
+          "id_producto": 1,
+          "cantidad": 2
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "fecha": "01-02-2003",
+      "estado": 0,
+      "id_usuario": 1,
+      "productos": [
+        {
+          "id_producto": 1,
+          "cantidad": 2
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "fecha": "01-02-2003",
+      "estado": 0,
+      "id_usuario": 1,
+      "productos": [
+        {
+          "id_producto": 1,
+          "cantidad": 2
+        }
+      ]
+    },
+    {
+      "id": 6,
       "fecha": "01-02-2003",
       "estado": 1,
-      "id_usuario": "1",
+      "id_usuario": 1,
       "productos": [
         {
           "id_producto": 1,
@@ -371,70 +389,10 @@
       ]
     },
     {
-      "id": "4",
+      "id": 7,
       "fecha": "01-02-2003",
       "estado": 0,
-      "id_usuario": "1",
-      "productos": [
-        {
-          "id_producto": 1,
-          "cantidad": 2
-        }
-      ]
-    },
-    {
-      "id": "5",
-      "fecha": "01-02-2003",
-      "estado": 1,
-      "id_usuario": "1",
-      "productos": [
-        {
-          "id_producto": 1,
-          "cantidad": 2
-        }
-      ]
-    },
-    {
-      "id": "6",
-      "fecha": "01-02-2003",
-      "estado": 1,
-      "id_usuario": "1",
-      "productos": [
-        {
-          "id_producto": 1,
-          "cantidad": 2
-        }
-      ]
-    },
-    {
-      "id": "7",
-      "fecha": "01-02-2003",
-      "estado": 2,
-      "id_usuario": "1",
-      "productos": [
-        {
-          "id_producto": 1,
-          "cantidad": 2
-        }
-      ]
-    },
-    {
-      "id": "8",
-      "fecha": "01-02-2003",
-      "estado": 0,
-      "id_usuario": "1",
-      "productos": [
-        {
-          "id_producto": 1,
-          "cantidad": 2
-        }
-      ]
-    },
-    {
-      "id": "9",
-      "fecha": "01-02-2003",
-      "estado": 0,
-      "id_usuario": "1",
+      "id_usuario": 1,
       "productos": [
         {
           "id_producto": 1,
@@ -445,107 +403,204 @@
   ],
   "pagos": [
     {
-      "id": "1",
-      "nombreTarjeta": "asd",
-      "numeroTarjeta": "asfsadsad",
-      "fechaCaducidad": "06/26",
-      "id_carrito": "2"
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "12321321321",
+      "codigoSeguridad": "121",
+      "fechaCaducidad": "12/12",
+      "id_carrito": 1,
+      "id": 1
+    },
+    {
+      "nombreTarjeta": "wd",
+      "numeroTarjeta": "231",
+      "codigoSeguridad": "213",
+      "fechaCaducidad": "12/12",
+      "id_carrito": 1,
+      "id": 2
+    },
+    {
+      "nombreTarjeta": "wdqw",
+      "numeroTarjeta": "231123",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1",
+      "id": 3
     },
     {
       "nombreTarjeta": "PAU FANDOS GORRIS",
-      "numeroTarjeta": "5443543",
-      "codigoSeguridad": "586",
-      "fechaCaducidad": "06/26",
-      "id_carrito": "undefined",
-      "id": "ISaFLiI"
-    },
-    {
-      "nombreTarjeta": "PAU FANDOS GORRIS",
-      "numeroTarjeta": "2323432",
-      "codigoSeguridad": "586",
-      "fechaCaducidad": "06/26",
-      "id_carrito": "3",
-      "id": "_RCsxAB"
-    },
-    {
-      "nombreTarjeta": "PAU FANDOS GORRIS",
-      "numeroTarjeta": "234343243243",
-      "codigoSeguridad": "5",
-      "fechaCaducidad": "06/26",
-      "id_carrito": "3",
-      "id": "o99_Iw9"
-    },
-    {
-      "nombreTarjeta": "PAU FANDOS GORRIS",
-      "numeroTarjeta": "2343432432",
-      "codigoSeguridad": "262",
-      "fechaCaducidad": "06/2",
-      "id_carrito": "3",
-      "id": "C0bkJJi"
-    },
-    {
-      "nombreTarjeta": "PAU FANDOS IS",
-      "numeroTarjeta": "3432432",
-      "codigoSeguridad": "5",
-      "fechaCaducidad": "06/26",
-      "id_carrito": "3",
-      "id": "KV7nHdy"
-    },
-    {
-      "nombreTarjeta": "PAU F",
-      "numeroTarjeta": "52345234",
-      "codigoSeguridad": "556",
-      "fechaCaducidad": "06/26",
-      "id_carrito": "3",
-      "id": "6-T1xIx"
-    },
-    {
-      "nombreTarjeta": "dasdsd",
-      "numeroTarjeta": "22",
-      "codigoSeguridad": "25",
-      "fechaCaducidad": "06/26",
-      "id_carrito": "3",
-      "id": "r6B98gS"
-    },
-    {
-      "nombreTarjeta": "PAU F",
-      "numeroTarjeta": "1423123",
+      "numeroTarjeta": "2123213",
       "codigoSeguridad": "123",
       "fechaCaducidad": "21/12",
-      "id_carrito": "3",
-      "id": "3b69_Ll"
+      "id_carrito": "1",
+      "id": 4
     },
     {
-      "nombreTarjeta": "PAU F",
-      "numeroTarjeta": "123213",
+      "nombreTarjeta": "ewqe",
+      "numeroTarjeta": "wqe",
+      "codigoSeguridad": "wqe",
+      "fechaCaducidad": "wq/wq",
+      "id_carrito": "1",
+      "id": 5
+    },
+    {
+      "nombreTarjeta": "132",
+      "numeroTarjeta": "123",
       "codigoSeguridad": "123",
       "fechaCaducidad": "12/12",
-      "id_carrito": "3",
-      "id": "w5CSyKS"
+      "id_carrito": "2",
+      "id": 6
     },
     {
-      "nombreTarjeta": "PAU FANDOS GORRIS",
-      "numeroTarjeta": "21321321",
+      "nombreTarjeta": "wqe",
+      "numeroTarjeta": "qwe",
+      "codigoSeguridad": "wqe",
+      "fechaCaducidad": "qw/qw",
+      "id_carrito": "2",
+      "id": 7
+    },
+    {
+      "nombreTarjeta": "wqeqw",
+      "numeroTarjeta": "321321",
       "codigoSeguridad": "123",
       "fechaCaducidad": "21/21",
+      "id_carrito": "2",
+      "id": 8
+    },
+    {
+      "nombreTarjeta": "wqeqe",
+      "numeroTarjeta": "23123",
+      "codigoSeguridad": "322",
+      "fechaCaducidad": "12/3",
       "id_carrito": "3",
-      "id": "oz37WwJ"
+      "id": 9
+    },
+    {
+      "nombreTarjeta": "sadd",
+      "numeroTarjeta": "1232131",
+      "codigoSeguridad": "121",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "2",
+      "id": 10
     },
     {
       "nombreTarjeta": "PAU FANDOS GORRIS",
-      "numeroTarjeta": "4654654",
-      "codigoSeguridad": "122",
+      "numeroTarjeta": "213213123",
+      "codigoSeguridad": "123",
       "fechaCaducidad": "12/12",
-      "id_carrito": "3",
-      "id": "ojmnzuJ"
+      "id_carrito": "5",
+      "id": 11
     },
     {
-      "nombreTarjeta": "13232",
-      "numeroTarjeta": "31232",
-      "codigoSeguridad": "266",
-      "fechaCaducidad": "06/26",
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "123213",
+      "codigoSeguridad": "213",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "2",
+      "id": 12
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "32432º3123",
+      "codigoSeguridad": "243",
+      "fechaCaducidad": "12/34",
+      "id_carrito": "4",
+      "id": 13
+    },
+    {
+      "nombreTarjeta": "we",
+      "numeroTarjeta": "3232",
+      "codigoSeguridad": "32",
+      "fechaCaducidad": "43/42",
+      "id_carrito": "5",
+      "id": 14
+    },
+    {
+      "nombreTarjeta": "asdsa",
+      "numeroTarjeta": "123213213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "4",
+      "id": 15
+    },
+    {
+      "nombreTarjeta": "wqed",
+      "numeroTarjeta": "2313",
+      "codigoSeguridad": "343",
+      "fechaCaducidad": "23/12",
+      "id_carrito": "4",
+      "id": 16
+    },
+    {
+      "nombreTarjeta": "sad",
+      "numeroTarjeta": "324324º",
+      "codigoSeguridad": "324",
+      "fechaCaducidad": "23/23",
+      "id_carrito": "6",
+      "id": 17
+    },
+    {
+      "nombreTarjeta": "asdsad",
+      "numeroTarjeta": "2421434234",
+      "codigoSeguridad": "423",
+      "fechaCaducidad": "32/23",
+      "id_carrito": "6",
+      "id": 18
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "12321321312312312312",
+      "codigoSeguridad": "586",
+      "fechaCaducidad": "12/24",
+      "id_carrito": "7",
+      "id": 19
+    },
+    {
+      "nombreTarjeta": "dsad",
+      "numeroTarjeta": "313",
+      "codigoSeguridad": "323",
+      "fechaCaducidad": "EQ/32",
+      "id_carrito": "1",
+      "id": 20
+    },
+    {
+      "nombreTarjeta": "ASDASD",
+      "numeroTarjeta": "12321",
+      "codigoSeguridad": "321",
+      "fechaCaducidad": "12/21",
+      "id_carrito": "2",
+      "id": 21
+    },
+    {
+      "nombreTarjeta": "WQD",
+      "numeroTarjeta": "12321",
+      "codigoSeguridad": "311",
+      "fechaCaducidad": "13/13",
       "id_carrito": "3",
-      "id": "THtdTno"
+      "id": 22
+    },
+    {
+      "nombreTarjeta": "sadsad",
+      "numeroTarjeta": "12323",
+      "codigoSeguridad": "134",
+      "fechaCaducidad": "13/21",
+      "id_carrito": "4",
+      "id": 23
+    },
+    {
+      "nombreTarjeta": "SADA",
+      "numeroTarjeta": "213213213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "5",
+      "id": 24
+    },
+    {
+      "nombreTarjeta": "sadad",
+      "numeroTarjeta": "12312",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "7",
+      "id": 25
     }
   ]
 }

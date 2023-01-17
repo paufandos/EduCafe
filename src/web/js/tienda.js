@@ -3,7 +3,7 @@ let activeUser
 let carrito;
 
 window.onload = () => {
-    localStorage.clear()
+    //localStorage.clear()
     if (!localStorage.getItem('carrito')) {
         window.localStorage.setItem("carrito", JSON.stringify(new Carrito(Date.now(), new Date().getFormattedDate())));
     }
@@ -132,13 +132,15 @@ function mostrarDetalleProducto(idProducto) {
 
 }
 
+
+//CARRITO
 function carritoSerialize(carrito) {
     return new Carrito(carrito.id, carrito.fecha, carrito.estado, carrito.id_usuario, carrito.productos)
 }
 
 function verCarrito() {
+    carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")));
     if (carrito.productos.length != 0) {
-        carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")));
         carrito.actualizarCarrito()
         window.localStorage.setItem("carrito", JSON.stringify(carrito))
     } else {
@@ -334,23 +336,11 @@ function realizarPago(carritoId) {
     newPay.id_carrito = carritoId;
     delete newPay.mesTarjeta;
     delete newPay.anyoTarjeta;
-
     request("POST", "pagos", newPay)
-        .then(() => {
-            console.log("pagado")
-            request("GET", "carrito/" + carritoId)
-                .then((carrito) => {
-                    carrito.estado = 0
-                    console.log(carrito)
-                    request("PUT", "carritos/" + carritoId, carrito)
-                        .then(carrito =>
-                            alert("carrito pagado -> " + carrito.id)
-                        )
-                        .catch(e => console.log(e));
-                })
-                .catch(e => console.log(e));
-        })
-        .catch(console.log("pagado"));;
+        .then(request("PATCH", "carritos/" + carritoId, { "estado": 0 })
+            .then(historialCarritos(activeUser.id))
+            .catch(e => console.log(e)))
+        .catch(e => console.log(e))
 }
 
 function recuperarCarrito(carritoId) {
