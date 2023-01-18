@@ -1361,12 +1361,12 @@ table {
 }
 @keyframes show {
   from {
-    transform: scale(0%);
     opacity: 0;
+    transform: translate3d(0, -50%, 0);
   }
   to {
-    transform: scale(100%);
     opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 .c-modal--close {
@@ -1374,12 +1374,12 @@ table {
 }
 @keyframes hide {
   from {
-    transform: scale(100%);
     opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: scale(0%);
     opacity: 0;
+    transform: translate3d(0, -50%, 0);
   }
 }
 

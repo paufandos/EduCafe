@@ -3,7 +3,7 @@
     "json-server": "^0.17.1"
   },
   "scripts": {
-    "start": "json-server --watch src/web/db/datos.json --port 3000 --routes src/web/db/routes.json"
-
+    "start": "json-server --watch db/datos.json --port 3000 --routes db/routes.json",
+    "compileCSS": "sass src/web/scss/main.scss src/web/css/style.css"
   }
 }
