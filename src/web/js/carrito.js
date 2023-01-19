@@ -75,25 +75,24 @@ class Carrito {
 				if (!dialog.open) {
 					dialog.showModal();
 				}
-				
-		}else{
+			});
+
+		} else {
 			dialog.close();
 		}
 	}
 
-	numeroArticulosTotal(){
-		let numProductos=0;
-		
+	numeroArticulosTotal() {
+		let numProductos = 0;
+
 		this.productos.forEach(element => {
-			numProductos+=element.unidades;
+			numProductos += element.unidades;
 		});
 		let burbuja = document.getElementById("cart_menu_num");
-		burbuja.innerHTML=numProductos;
+		burbuja.innerHTML = numProductos;
 		burbuja.classList = "c-icon__burbuja c-icon--xsmall";
 	}
-	
-	
-}
+
 
 
 	async getProducts() {
