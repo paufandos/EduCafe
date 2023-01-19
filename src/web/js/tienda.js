@@ -3,9 +3,14 @@ let activeUser
 let carrito;
 
 window.onload = () => {
-    //localStorage.clear()
+    localStorage.clear()
     if (!localStorage.getItem('carrito')) {
-        window.localStorage.setItem("carrito", JSON.stringify(new Carrito(Date.now(), new Date().getFormattedDate())));
+        if (!localStorage.getItem("isLogin") == "true") {
+            console.log(activeUser.id)
+            window.localStorage.setItem("carrito", JSON.stringify(new Carrito(Date.now(), new Date().getFormattedDate(), 1, activeUser.id)));
+        } else {
+            window.localStorage.setItem("carrito", JSON.stringify(new Carrito(Date.now(), new Date().getFormattedDate(), 1)));
+        }
     }
     if (!localStorage.getItem("isLogin")) {
         localStorage.setItem("isLogin", "false")
@@ -21,12 +26,8 @@ window.onload = () => {
 
 //TIENDA
 function mostrarCategorias() {
-    //declaracion de parametros que pasaremos al request
-    const parametro = "categorias";
-    const method = "get";
-
     //promesa para pintar las categorias
-    request(method, parametro, null)
+    request("GET", "categorias", null)
         //resolve de la promesa
         .then(listadoCategorias => {
             let main = document.getElementById("main");
@@ -41,19 +42,11 @@ function mostrarCategorias() {
             });
             asignarEvento("c-card__imagen", "click", mostrarProductos)
         })
-        //catch de la promesa
-        .catch(error => {
-            console.log("Error" + error);
-        });
-
+        .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
 }
 
 function mostrarProductos(id) {
-    //declaracion de parametros que pasaremos al request
-    const parametro = "productos";
-    const method = "get";
-
-    request(method, parametro, null)
+    request("GET", "productos", null)
         //resolve de la promesa
         .then(listadoProductos => {
             let main = document.getElementById("main");
@@ -86,7 +79,8 @@ function mostrarProductos(id) {
             }
             asignarEvento("fa-circle-info", "click", mostrarDetalleProducto);
             asignarEvento("fa-cart-plus", "click", anyadirArticulo);
-        });
+        })
+        .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
 
 }
 
@@ -94,12 +88,8 @@ function mostrarDetalleProducto(idProducto) {
     let dialog = document.getElementById("dialog");
     dialog.close();
 
-    //declaracion de parametros que pasaremos al request
-    const parametro = "productos";
-    const method = "get";
-
     //promesa para pintar las categorias
-    request(method, parametro, null)
+    request("GET", "productos", null)
         //resolve de la promesa
         .then(listadoProductos => {
             let articulo = listadoProductos.find(p => p.id == idProducto);
@@ -122,14 +112,10 @@ function mostrarDetalleProducto(idProducto) {
                                 </div>`;
 
             asignarEvento("add", "click", anyadirArticulo);
-            animacionSalidaModal("detalleProductoModal");
+            animacionSalidaModal("detalleProductoModal", "c-modal--close");
             dialog.showModal();
         })
-        .catch(error => {
-            console.log("Error" + error)
-        });
-
-
+        .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
 }
 
 
@@ -144,7 +130,7 @@ function verCarrito() {
         carrito.actualizarCarrito()
         window.localStorage.setItem("carrito", JSON.stringify(carrito))
     } else {
-        alert("carrito vacio")
+        alert("El carrito está vacío.")
     }
 }
 
@@ -160,7 +146,7 @@ function anyadirArticulo(id) {
             carrito.numeroArticulosTotal()
             window.localStorage.setItem("carrito", JSON.stringify(carrito))
         })
-        .catch(e => console.log(e + " no se ha encontrado articulo"))
+        .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
 }
 
 
@@ -186,13 +172,19 @@ function registrarUsuario() {
     }
 
     delete newUser.confirmPassword;
-    newUser.nombre = newUser.nombre + " " + newUser.apellidos
-    delete newUser.apellidos;
 
-    request("POST", "usuarios", newUser);
+    request("POST", "usuarios", newUser)
+        .then((usuario) => {
+            console.log(usuario)
+            alert("Bienvenido <b>" + newUser.nombre + "</b>, se ha completado tu registro correctamente.", "Bienvenido")
+            window.localStorage.setItem("isLogin", "true");
+            window.localStorage.setItem("user", JSON.stringify(new User(usuario.id, usuario.nombre, usuario.correo)));
+            activeUser = userSerialize(JSON.parse(window.localStorage.getItem("user")));
+            document.getElementById("dialog").close();
+        }).catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
 }
 
-function iniciarSesion(e) {
+function iniciarSesion(e, dialog) {
     e.preventDefault();
 
     let formData = new FormData(document.forms.formLogin);
@@ -212,22 +204,25 @@ function iniciarSesion(e) {
             if (usuario.password == user.password) {
                 window.localStorage.setItem("isLogin", "true");
                 window.localStorage.setItem("user", JSON.stringify(new User(usuario.id, usuario.nombre, usuario.correo)));
-                activeUser = userSerialize(JSON.parse(window.localStorage.getItem("user")))
-                changeLogInInterface(activeUser);
+                activeUser = userSerialize(JSON.parse(window.localStorage.getItem("user")));
+                alert("Bienvenido <b>" + activeUser.nombre + "</b>", "Bienvenido")
+                dialog.close()
             } else {
                 alert("Contraseña incorrecta")
             }
-        }).catch(e => { alert("El usuario no existe") })
+        })
+        .catch(e => alert("Usuario y/o contraseña incorrectos."))
 }
 
 function changeLogInInterface(user) {
+    console.log(user)
     let dialog = document.getElementById("dialog");
     dialog.close();
 
     dialog.classList = "c-modal c-modal--xsmall miCuenta";
     dialog.innerHTML = `<div class="c-bubble">
                             <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
-                                <div class="c-title"><i class="c-icon fa-solid fa-user"></i> Mi cuenta</div>
+                                <div class="c-title c-title--medium"><i class="c-icon fa-solid fa-user"></i>Hola, ${user.nombre}!</div>
                                 <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
                             </div>
                             <label class="c-label" for="nombre">Nombre</label>
@@ -256,9 +251,9 @@ function changeLogInInterface(user) {
                                 Historial de carritos
                             </div>
                         </div>`;
-    animacionSalidaModal("miCuenta");
-    asignarEvento("fa-list", "click", historialCarritos)
-    dialog.showModal();
+    animacionSalidaModal("miCuenta", "c-modal--close");
+    asignarEvento("fa-list", "click", historialCarritos);
+    dialog.showModal()
 }
 
 function historialCarritos(id_usuario) {
@@ -281,6 +276,7 @@ function historialCarritos(id_usuario) {
     const method = "get";
     request(method, parametro, null)
         .then(historialCarritos => {
+            console.log(historialCarritos)
             Array.from(historialCarritos).forEach(carrito => {
                 //Pintamos todos los carritos
                 modalHistorialCarrito.innerHTML += `<div id="cartRow-${carrito.id}" class="c-cart-list l-flex l-flex--align-items-center">
@@ -311,12 +307,9 @@ function historialCarritos(id_usuario) {
             asignarEvento("borrar", "click", confirmarBorrar);
 
             //Añadimos la animación de salida al modal
-            animacionSalidaModal("historialCarritoModal");
-            if (!dialog.open) {
-                // dialog.close();
-                dialog.showModal();
-            }
-        });
+            animacionSalidaModal("historialCarritoModal", "c-modal--close");
+            dialog.showModal();
+        }).catch(alert("No tienes ningún carrito guardado", "Aviso"));
 }
 
 function verDetalleCarrito(carritoId) {
@@ -399,21 +392,25 @@ function realizarPago(carritoId) {
     for (const [key, value] of formData) {
         newPay[key] = value;
     }
-
+    console.log(newPay)
     if (!newPay["nombreTarjeta"] || !newPay["numeroTarjeta"] || !newPay["mesTarjeta"] || !newPay["anyoTarjeta"] || !newPay["codigoSeguridad"]) {
-        alert("Por favor rellene todos los campos");
+        alert("Por favor rellene todos los campos", "Datos incorrectos");
         return;
+    } else {
+        console.log(carritoId)
+        newPay.fechaCaducidad = newPay.mesTarjeta + "/" + newPay.anyoTarjeta
+        newPay.id_carrito = carritoId;
+        delete newPay.mesTarjeta;
+        delete newPay.anyoTarjeta;
+        request("POST", "pagos", newPay)
+            .then(request("PATCH", "carritos/" + carritoId, { "estado": 0 })
+                .then(() => {
+                    document.getElementById("dialog").close()
+                    alert("El pago del carrito con id " + carritoId + " se ha realizado correctamente")
+                })
+                .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR")))
+            .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
     }
-
-    newPay.fechaCaducidad = newPay.mesTarjeta + "/" + newPay.anyoTarjeta
-    newPay.id_carrito = carritoId;
-    delete newPay.mesTarjeta;
-    delete newPay.anyoTarjeta;
-    request("POST", "pagos", newPay)
-        .then(request("PATCH", "carritos/" + carritoId, { "estado": 0 })
-            .then(historialCarritos(activeUser.id))
-            .catch(e => console.log(e)))
-        .catch(e => console.log(e))
 }
 
 function recuperarCarrito(carritoId) {

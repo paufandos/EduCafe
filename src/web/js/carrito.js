@@ -35,7 +35,7 @@ class Carrito {
 		this.numeroArticulosTotal();
 	}
 
-	actualizarCarrito() {
+	actualizarCarrito(isLogin) {
 		if (this.productos != 0) {
 			let dialog = document.getElementById("dialog");
 			dialog.classList = "c-modal c-modal--large carritoModal";
@@ -64,19 +64,31 @@ class Carrito {
 									</div>
 								</div`;
 				dialog.innerHTML = htmlCarrito;
-				animacionSalidaModal("carritoModal");
+				animacionSalidaModal("carritoModal", "c-modal--close");
 
 
 				Array.from(document.getElementsByClassName("mas")).forEach(boton => boton.addEventListener("click", () => { this.modificaUnidades(boton.parentNode.parentNode.id.split("-")[1], "suma") }))
 				Array.from(document.getElementsByClassName("menos")).forEach(boton => boton.addEventListener("click", () => { this.modificaUnidades(boton.parentNode.parentNode.id.split("-")[1], "resta") }))
 				Array.from(document.getElementsByClassName("eliminar")).forEach(boton => boton.addEventListener("click", () => { this.borraArticulo(boton.parentNode.parentNode.id.split("-")[1]) }))
-				document.getElementById("pago").onclick = modalPago;
+				document.getElementById("pago").onclick = () => {
+					if (localStorage.getItem("isLogin") == "true") {
+						this.id_usuario = userSerialize(JSON.parse(window.localStorage.getItem("user"))).id;
+						request("POST", "carritos", this)
+							.then(() => {
+								alert("El carrito con id " + this.id + " ha sido guardado correctamente", "Aviso")
+								modalPago(this.id);
+							})
+							.catch(alert("No se ha podido guardar el carrito correctamente.", "ERROR"))
+					} else {
+						document.getElementById("dialog").close()
+						alert("Es necesario estar registrado para realizar esta operación.", "Registrate")
+					}
+				}
 
 				if (!dialog.open) {
 					dialog.showModal();
 				}
-			});
-
+			}).catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
 		} else {
 			dialog.close();
 		}

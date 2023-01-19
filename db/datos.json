@@ -313,6 +313,174 @@
       "nombre": "w w",
       "correo": "w",
       "password": "w"
+    },
+    {
+      "nombre": "Alma Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1234",
+      "id": 2
+    },
+    {
+      "nombre": "Alma Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1234",
+      "id": 3
+    },
+    {
+      "nombre": "Alma Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1234",
+      "id": 4
+    },
+    {
+      "nombre": "Alma Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1234",
+      "id": 5
+    },
+    {
+      "nombre": "Alma Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1234",
+      "id": 6
+    },
+    {
+      "nombre": "Alma Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1234",
+      "id": 7
+    },
+    {
+      "nombre": "    fdfsdf Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1234",
+      "id": 8
+    },
+    {
+      "nombre": "Alma Rodríguez Franqueza",
+      "correo": "rodriguezfranquezaalma@gmail.com",
+      "password": "1",
+      "id": 9
+    },
+    {
+      "nombre": "Pau  Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 10
+    },
+    {
+      "nombre": "Pau  Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 11
+    },
+    {
+      "nombre": "Pau  Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 12
+    },
+    {
+      "nombre": "Pau  Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 13
+    },
+    {
+      "nombre": "Jose Luis Coloma Tormo Coloma Tormo",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 14
+    },
+    {
+      "nombre": "Jose Luis  Coloma Tormo",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 15
+    },
+    {
+      "nombre": "Juan Antonio",
+      "apellidos": "Coloma Tormo",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 16
+    },
+    {
+      "nombre": "Esteban",
+      "apellidos": "Adarme Snchís",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "12345",
+      "id": 17
+    },
+    {
+      "nombre": "Esteban",
+      "apellidos": "Adarme Snchís",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "12345",
+      "id": 18
+    },
+    {
+      "nombre": "Esteban",
+      "apellidos": "Adarme Snchís",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "12345",
+      "id": 19
+    },
+    {
+      "nombre": "Esteban",
+      "apellidos": "Adarme Snchís",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "12345",
+      "id": 20
+    },
+    {
+      "nombre": "Esteban",
+      "apellidos": "Adarme Snchís",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "12345",
+      "id": 21
+    },
+    {
+      "nombre": "Pau ",
+      "apellidos": "Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1",
+      "id": 22
+    },
+    {
+      "nombre": "Pau ",
+      "apellidos": "Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1",
+      "id": 23
+    },
+    {
+      "nombre": "Pau ",
+      "apellidos": "Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1",
+      "id": 24
+    },
+    {
+      "nombre": "Pau ",
+      "apellidos": "Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1",
+      "id": 25
+    },
+    {
+      "nombre": "Esteban",
+      "apellidos": "Adarme Sanchís",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1",
+      "id": 26
+    },
+    {
+      "nombre": "Pau ",
+      "apellidos": "Fandos Gorris",
+      "correo": "1@1.1",
+      "password": "1",
+      "id": 27
     }
   ],
   "carritos": [
@@ -412,6 +580,150 @@
       "productos": [
         {
           "id_producto": 1,
+          "cantidad": 2
+        }
+      ]
+    },
+    {
+      "id": 1674126073789,
+      "fecha": "19-00-2023",
+      "estado": null,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 23,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 22,
+          "cantidad": 2
+        },
+        {
+          "id_producto": 21,
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674127165005,
+      "fecha": "19-00-2023",
+      "estado": 0,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674127303501,
+      "fecha": "19-00-2023",
+      "estado": 0,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 2
+        }
+      ]
+    },
+    {
+      "id": 1674128710554,
+      "fecha": "19-00-2023",
+      "estado": 0,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 23,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 22,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 21,
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674129872975,
+      "fecha": "19-00-2023",
+      "estado": 0,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 4
+        }
+      ]
+    },
+    {
+      "id": 1674130430103,
+      "fecha": "19-00-2023",
+      "estado": 1,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674130533197,
+      "fecha": "19-00-2023",
+      "estado": 0,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674130713314,
+      "fecha": "19-00-2023",
+      "estado": 1,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674130917519,
+      "fecha": "19-00-2023",
+      "estado": 1,
+      "id_usuario": null,
+      "productos": [
+        {
+          "id_producto": 24,
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674131343206,
+      "fecha": "19-00-2023",
+      "estado": 1,
+      "id_usuario": 27,
+      "productos": [
+        {
+          "id_producto": 24,
           "cantidad": 2
         }
       ]
@@ -617,6 +929,188 @@
       "fechaCaducidad": "12/12",
       "id_carrito": "7",
       "id": 25
+    },
+    {
+      "nombreTarjeta": "",
+      "numeroTarjeta": "",
+      "codigoSeguridad": "",
+      "fechaCaducidad": "/",
+      "id_carrito": "[object PointerEvent]",
+      "id": 26
+    },
+    {
+      "nombreTarjeta": "1232132",
+      "numeroTarjeta": "3123213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "31/12",
+      "id_carrito": "undefined",
+      "id": 27
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "12321323",
+      "codigoSeguridad": "234",
+      "fechaCaducidad": "12/23",
+      "id": 28
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "3123213",
+      "codigoSeguridad": "312",
+      "fechaCaducidad": "12/32",
+      "id": 29
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "123213213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "undefined",
+      "id": 30
+    },
+    {
+      "nombreTarjeta": "sdsad",
+      "numeroTarjeta": "1233123213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/21",
+      "id_carrito": "undefined",
+      "id": 31
+    },
+    {
+      "nombreTarjeta": "sad",
+      "numeroTarjeta": "213213213",
+      "codigoSeguridad": "233",
+      "fechaCaducidad": "12/21",
+      "id_carrito": "1674127061638",
+      "id": 32
+    },
+    {
+      "nombreTarjeta": "12323123",
+      "numeroTarjeta": "213123213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674127165005",
+      "id": 33
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "123213213",
+      "codigoSeguridad": "213",
+      "fechaCaducidad": "12/13",
+      "id_carrito": "1674127236410",
+      "id": 34
+    },
+    {
+      "nombreTarjeta": "23123",
+      "numeroTarjeta": "21321",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674127283863",
+      "id": 35
+    },
+    {
+      "nombreTarjeta": "2213123213213",
+      "numeroTarjeta": "2132132",
+      "codigoSeguridad": "213",
+      "fechaCaducidad": "21/12",
+      "id_carrito": "1674127303501",
+      "id": 36
+    },
+    {
+      "nombreTarjeta": "23123º",
+      "numeroTarjeta": "123123123",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674127449381",
+      "id": 37
+    },
+    {
+      "nombreTarjeta": "23123º",
+      "numeroTarjeta": "123123123",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674127449381",
+      "id": 38
+    },
+    {
+      "nombreTarjeta": "23123º",
+      "numeroTarjeta": "123123123",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674127449381",
+      "id": 39
+    },
+    {
+      "nombreTarjeta": "23123º",
+      "numeroTarjeta": "123123123",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674127449381",
+      "id": 40
+    },
+    {
+      "nombreTarjeta": "23123º",
+      "numeroTarjeta": "123123123",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674127449381",
+      "id": 41
+    },
+    {
+      "nombreTarjeta": "12312321º",
+      "numeroTarjeta": "3131423",
+      "codigoSeguridad": "342",
+      "fechaCaducidad": "31/32",
+      "id_carrito": "1674128432341",
+      "id": 42
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "3213213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674128710554",
+      "id": 43
+    },
+    {
+      "nombreTarjeta": "sdsad",
+      "numeroTarjeta": "123123",
+      "codigoSeguridad": "134",
+      "fechaCaducidad": "13/13",
+      "id_carrito": "1674128916345",
+      "id": 44
+    },
+    {
+      "nombreTarjeta": "sdsad",
+      "numeroTarjeta": "123123",
+      "codigoSeguridad": "134",
+      "fechaCaducidad": "13/13",
+      "id_carrito": "1674128916345",
+      "id": 45
+    },
+    {
+      "nombreTarjeta": "334324324",
+      "numeroTarjeta": "234324324",
+      "codigoSeguridad": "234",
+      "fechaCaducidad": "23/23",
+      "id_carrito": "1674129025974",
+      "id": 46
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "213213213",
+      "codigoSeguridad": "312",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674129872975",
+      "id": 47
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "12323213",
+      "codigoSeguridad": "123",
+      "fechaCaducidad": "12/12",
+      "id_carrito": "1674130533197",
+      "id": 48
     }
   ]
 }

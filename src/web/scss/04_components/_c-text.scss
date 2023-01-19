@@ -1,17 +1,28 @@
-.c-text{
+.c-text {
     text-align: justify;
     font-family: getFontFamily("principal");
-    color: getColors("principal",7);
+    color: getColors("principal", 7);
 
-    &--dark{
+    &--principal-bold {
         color: getColors("principal", 0);
         font-weight: 700;
     }
-    &--medium{
+
+    &--xl {
         font-size: getFontSize("xl");
     }
 
-    &--center{
+    &--center {
         text-align: center;
+    }
+
+    &--dark {
+        color: #000000;
+        font-weight: 600;
+    }
+
+    &--medium {
+        font-size: getFontSize("m");
+        line-height: 1.3em;
     }
 }

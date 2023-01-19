@@ -28,11 +28,11 @@
             color: #541C24;
         }
 
-        &-light {
-            color: getColors("principal", 6);
+        &-light{
+            color: getColors("principal", 8);
 
-            &:hover {
-                color: getColors("principal", 4);
+            &:hover{
+                color: getColors("principal", 6);
             }
         }
     }
@@ -64,5 +64,8 @@
 
     &--big {
         font-size: getFontSize("6xl");
+    &--xsmall{
+        margin: getMargin(2);
+        font-size: getFontSize("m");
     }
 }

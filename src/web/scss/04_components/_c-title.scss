@@ -18,4 +18,13 @@
     &--medium{
         font-size: getFontSize("2xl");
     }
+
+    &--small{
+        font-size: getFontSize("l");
+    }
+
+    &--lighter{
+        color: getColors("principal", 8);
+    }
+    
 }

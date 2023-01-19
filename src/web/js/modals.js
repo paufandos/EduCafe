@@ -37,9 +37,9 @@ function modalLogin() {
                             </div>
                         </div>`;
 
-        animacionSalidaModal("loginModal");
-        document.getElementById("registro").onclick = modalRegistro;
-        document.getElementById("formLogin").onsubmit = () => iniciarSesion(event);
+        animacionSalidaModal("loginModal", "c-modal--close");
+        document.getElementById("registro").onclick =  modalRegistro;
+        document.getElementById("formLogin").onsubmit = () => iniciarSesion(event, dialog);
         dialog.showModal();
     }
 }
@@ -80,7 +80,7 @@ function modalRegistro() {
                             </div>
                         </div>`;
     document.getElementById("botonRegistro").onclick = registrarUsuario;
-    animacionSalidaModal("registroModal");
+    animacionSalidaModal("registroModal", "c-modal--close");
     dialog.showModal();
 }
 
@@ -94,7 +94,7 @@ function modalPago(id_carrito) {
                                 <div class="c-title">Formulario de pago</div>
                                 <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
                             </div>
-                            <form id="formPago">
+                            <form id="formPago" onsubmit="return false;">
                                 <label class="c-label" for="nombreTarjeta">Nombre de la Tarjeta</label>
                                 <input id="nombreTarjeta" class="c-input c-input--w-100" name="nombreTarjeta" type="text" size="47"
                                     placeholder="Tal y como aparece en la tarjeta">
@@ -131,7 +131,7 @@ function modalPago(id_carrito) {
                             </form>
                         </div>`;
 
-    animacionSalidaModal("pagoModal");
+    animacionSalidaModal("pagoModal", "c-modal--close");
     asignarEvento("confirmarPago", "click", realizarPago)
     dialog.showModal();
 }
@@ -147,7 +147,7 @@ function confirmar(carritoId) {
                         </div>
                         <div class="g--text-align-center g--margin-7">
                             <i class="c-icon c-icon--grey c-icon--big fa-solid fa-trash-can"></i>
-                            <div class="c-text c-text--dark c-text--medium c-text--center">¿Desea eliminar el carrito con id ${carritoId}?</div>
+                            <div class="c-text c-text--principal-bold c-text--xl c-text--center">¿Desea eliminar el carrito con id ${carritoId}?</div>
                         </div>
                         <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
                             <button id="botonAceptar" class="c-button">Eliminar</button>
