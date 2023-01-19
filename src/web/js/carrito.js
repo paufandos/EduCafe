@@ -86,7 +86,8 @@ class Carrito {
 		let numProductos = 0;
 
 		this.productos.forEach(element => {
-			numProductos += element.unidades;
+			numProductos += element.cantidad;
+			console.log(numProductos)
 		});
 		let burbuja = document.getElementById("cart_menu_num");
 		burbuja.innerHTML = numProductos;
