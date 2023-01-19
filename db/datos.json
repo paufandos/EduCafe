@@ -1,283 +1,283 @@
 {
   "productos": [
     {
-      "id": 1,
-      "id_categoria": 1,
+      "id": "1",
+      "id_categoria": "1",
       "nombre": "café solo",
       "descripcion": "Nuestro expresso más sabroso, con todo nuestro aroma de siempre. ¡Un clásico!",
       "precio": 0.7
     },
     {
-      "id": 2,
-      "id_categoria": 1,
+      "id": "2",
+      "id_categoria": "1",
       "nombre": "café cortado",
-      "descripcion": "café con un poco de leche",
+      "descripcion": "¡El típico! Perfecto para los que necesitan el café con un toque de leche",
       "precio": 0.8
     },
     {
-      "id": 3,
-      "id_categoria": 1,
+      "id": "3",
+      "id_categoria": "1",
       "nombre": "café bombón",
-      "descripcion": "café con leche condensada",
+      "descripcion": "El más dulce nuestros cafés. ¡Endúlzate el día!",
       "precio": 0.8
     },
     {
-      "id": 4,
-      "id_categoria": 1,
+      "id": "4",
+      "id_categoria": "1",
       "nombre": "vaso de leche",
-      "descripcion": "vaso de leche fría o caliente",
+      "descripcion": "Porque no todo el mundo quiere café, tu aporte lácteo del día",
       "precio": 1
     },
     {
-      "id": 5,
-      "id_categoria": 1,
+      "id": "5",
+      "id_categoria": "1",
       "nombre": "colacao",
-      "descripcion": "vaso de leche con colacao",
+      "descripcion": "La alegría necesaria para el vaso de leche, ¡el Cola-Cao!",
       "precio": 1.1
     },
     {
-      "id": 6,
-      "id_categoria": 1,
+      "id": "6",
+      "id_categoria": "1",
       "nombre": "capuccino",
-      "descripcion": "café estilo capuccino",
+      "descripcion": "Para los más exigentes y que necesitan algo más que café",
       "precio": 1.2
     },
     {
-      "id": 7,
-      "id_categoria": 1,
+      "id": "7",
+      "id_categoria": "1",
       "nombre": "café americano",
-      "descripcion": "café largo",
+      "descripcion": "Las tazas grandes no siempre tienen que tener la combinación de café y leche, ¡puede ser café y agua!",
       "precio": 0.8
     },
     {
-      "id": 8,
-      "id_categoria": 1,
+      "id": "8",
+      "id_categoria": "1",
       "nombre": "café del tiempo",
-      "descripcion": "café con hielo y con limón",
+      "descripcion": "¡El rey contra el calor! Nuestro expresso con hielo y limón",
       "precio": 1.2
     },
     {
-      "id": 9,
-      "id_categoria": 2,
+      "id": "9",
+      "id_categoria": "2",
       "nombre": "Coca-cola",
-      "descripcion": "lata de 33 cl. coca-cola normal",
+      "descripcion": "La lata de Coca-Cola de toda la vida, ¡refrescante!",
       "precio": 1.2
     },
     {
-      "id": 10,
-      "id_categoria": 2,
+      "id": "10",
+      "id_categoria": "2",
       "nombre": "Coca-cola zero",
-      "descripcion": "lata de 33 cl. cocacola sin azúcar",
+      "descripcion": "El mejor sabor de Coca-Cola con cero azúcar",
       "precio": 1.2
     },
     {
-      "id": 11,
-      "id_categoria": 2,
+      "id": "11",
+      "id_categoria": "2",
       "nombre": "Fanta naranja/limón",
-      "descripcion": "lata de 33cl.",
+      "descripcion": "Tú eliges, ¿eres más de naranja o de limón?",
       "precio": 1.2
     },
     {
-      "id": 12,
-      "id_categoria": 2,
+      "id": "12",
+      "id_categoria": "2",
       "nombre": "Aquarius naranja/limón",
-      "descripcion": "botella de cristal de 33cl.",
+      "descripcion": "La bebida de los deportistas",
       "precio": 1.3
     },
     {
-      "id": 13,
-      "id_categoria": 2,
+      "id": "13",
+      "id_categoria": "2",
       "nombre": "Monster verde",
-      "descripcion": "lata de 50cl de monster verde.",
+      "descripcion": "La energía extra que necesitas cuando no puedes más",
       "precio": 2
     },
     {
-      "id": 14,
-      "id_categoria": 2,
+      "id": "14",
+      "id_categoria": "2",
       "nombre": "Red Bull",
-      "descripcion": "lata de 20cl de Red Bull original.",
+      "descripcion": "Todos necesitamos que nos den alas para rendir mejor",
       "precio": 2.2
     },
     {
-      "id": 15,
-      "id_categoria": 2,
+      "id": "15",
+      "id_categoria": "2",
       "nombre": "Zumos",
-      "descripcion": "botella de 33cl. de varios sabores",
+      "descripcion": "Los mejores zumos naturales de frutas de proximidad",
       "precio": 1.2
     },
     {
-      "id": 16,
-      "id_categoria": 2,
+      "id": "16",
+      "id_categoria": "2",
       "nombre": "Batidos",
-      "descripcion": "Batidos de leche de varios sabores",
+      "descripcion": "Agítalos bien antes de tomarlos, ¡te endulzarán!",
       "precio": 1.2
     },
     {
-      "id": 17,
-      "id_categoria": 2,
+      "id": "17",
+      "id_categoria": "2",
       "nombre": "Bifrutas",
-      "descripcion": "zumos con leches con varios sabores",
+      "descripcion": "El brick más sabroso y vitaminado",
       "precio": 1.2
     },
     {
-      "id": 18,
-      "id_categoria": 2,
+      "id": "18",
+      "id_categoria": "2",
       "nombre": "Agua pequeña.",
-      "descripcion": "Botella de plástico de 33cl.",
+      "descripcion": "Para quien quiere matar su sed rápidamente",
       "precio": 0.8
     },
     {
-      "id": 19,
-      "id_categoria": 2,
+      "id": "19",
+      "id_categoria": "2",
       "nombre": "Agua con gas",
-      "descripcion": "Botella de plástico de 33cl.",
+      "descripcion": "Hay quien necesita el agua con algo más",
       "precio": 0.8
     },
     {
-      "id": 20,
-      "id_categoria": 2,
+      "id": "20",
+      "id_categoria": "2",
       "nombre": "Agua grande 1.5l",
-      "descripcion": "Botella de plástico de 1.5l",
+      "descripcion": "El depósito de gasolina para tu día a día",
       "precio": 1.2
     },
     {
-      "id": 21,
-      "id_categoria": 3,
+      "id": "21",
+      "id_categoria": "3",
       "nombre": "Bocadillo pequeño",
-      "descripcion": "medio Bocadillo con varios ingredientes",
+      "descripcion": "Apodado el “quita-hambres”, tremendamente sabroso",
       "precio": 2
     },
     {
-      "id": 22,
-      "id_categoria": 3,
+      "id": "22",
+      "id_categoria": "3",
       "nombre": "Bocadillo completo",
-      "descripcion": "Bocadillo entero con varios ingredientes a elegir",
+      "descripcion": "La estrella del menú, pídelo con los ingredientes que más te gusten",
       "precio": 2
     },
     {
-      "id": 23,
-      "id_categoria": 3,
+      "id": "23",
+      "id_categoria": "3",
       "nombre": "Pulga (montadito)",
-      "descripcion": "Mini bocadillo con varios ingredientes",
+      "descripcion": "El bocadillo más rápido de todo el oeste, forastero",
       "precio": 1.7
     },
     {
-      "id": 24,
-      "id_categoria": 3,
+      "id": "24",
+      "id_categoria": "3",
       "nombre": "Paninis",
-      "descripcion": "",
+      "descripcion": "Aroma italiano en nuestra cafetería",
       "precio": 1.2
     },
     {
-      "id": 25,
-      "id_categoria": 4,
+      "id": "25",
+      "id_categoria": "4",
       "nombre": "Caracolas",
-      "descripcion": "",
+      "descripcion": "Enróllate con nuestras delicias",
       "precio": 0.5
     },
     {
-      "id": 26,
-      "id_categoria": 4,
+      "id": "26",
+      "id_categoria": "4",
       "nombre": "MiniEnsaimadas",
-      "descripcion": "",
+      "descripcion": "Porque las cosas pequeñas también son sabrosas y dulces",
       "precio": 0.5
     },
     {
-      "id": 27,
-      "id_categoria": 4,
+      "id": "27",
+      "id_categoria": "4",
       "nombre": "Caracola Grande",
-      "descripcion": "",
+      "descripcion": "Siempre alguien tiene más apetito, con ella te saciarás",
       "precio": 1.2
     },
     {
-      "id": 28,
-      "id_categoria": 4,
+      "id": "28",
+      "id_categoria": "4",
       "nombre": "Triángulo de chocolate",
-      "descripcion": "",
+      "descripcion": "El dulce más apreciado por los estudiantes de trigonometría",
       "precio": 1.5
     },
     {
-      "id": 29,
-      "id_categoria": 5,
+      "id": "29",
+      "id_categoria": "5",
       "nombre": "Empanadilla de pisto",
-      "descripcion": "",
+      "descripcion": "El topicazo de la cafetería, no podía faltar",
       "precio": 1.2
     },
     {
-      "id": 30,
-      "id_categoria": 5,
+      "id": "30",
+      "id_categoria": "5",
       "nombre": "Empanadilla de espinacas",
-      "descripcion": "",
+      "descripcion": "Las favoritas de Popeye",
       "precio": 1.5
     },
     {
-      "id": 31,
-      "id_categoria": 5,
+      "id": "31",
+      "id_categoria": "5",
       "nombre": "Napolitanas jamón/queso",
-      "descripcion": "",
+      "descripcion": "La mejor combinación: jamón y queso. ¡Inigualable!",
       "precio": 1.5
     },
     {
-      "id": 32,
-      "id_categoria": 5,
+      "id": "32",
+      "id_categoria": "5",
       "nombre": "Rosquilletas",
-      "descripcion": "",
+      "descripcion": "Lo más crujiente que tenemos, todos las quieren",
       "precio": 1.5
     },
     {
-      "id": 33,
-      "id_categoria": 6,
+      "id": "33",
+      "id_categoria": "6",
       "nombre": "Mikado",
-      "descripcion": "",
+      "descripcion": "Para entretenerse y disfrutar",
       "precio": 1.2
     },
     {
-      "id": 34,
-      "id_categoria": 6,
+      "id": "34",
+      "id_categoria": "6",
       "nombre": "Oreo",
-      "descripcion": "",
+      "descripcion": "El sabor de siempre a un precio irresistible",
       "precio": 1.2
     },
     {
-      "id": 35,
-      "id_categoria": 6,
+      "id": "35",
+      "id_categoria": "6",
       "nombre": "Kinder blanco/negro",
-      "descripcion": "",
+      "descripcion": "Elige tu sabor favorito, blanco o negro",
       "precio": 1.2
     },
     {
-      "id": 36,
-      "id_categoria": 6,
+      "id": "36",
+      "id_categoria": "6",
       "nombre": "Krits",
-      "descripcion": "",
+      "descripcion": "Algo salado para contrarrestar tanto dulce",
       "precio": 1.2
     },
     {
-      "id": 37,
-      "id_categoria": 6,
+      "id": "37",
+      "id_categoria": "6",
       "nombre": "Filipinos",
-      "descripcion": "",
+      "descripcion": "Están tan buenos que te los comerás sin darte cuenta",
       "precio": 1
     },
     {
-      "id": 38,
-      "id_categoria": 6,
+      "id": "38",
+      "id_categoria": "6",
       "nombre": "Halls",
-      "descripcion": "",
+      "descripcion": "Los caramelos favoritos de Chiquito de la Calzada",
       "precio": 1
     },
     {
-      "id": 39,
-      "id_categoria": 6,
+      "id": "39",
+      "id_categoria": "6",
       "nombre": "Chuches grande",
       "descripcion": "¡El bolsón! Y no de la comarca de la Tierra Media",
       "precio": 1
     },
     {
-      "id": 40,
-      "id_categoria": 6,
+      "id": "40",
+      "id_categoria": "6",
       "nombre": "Chuches pequeña",
-      "descripcion": "",
+      "descripcion": "Se adapta a cualquier bolsillo. Siempre disponible para una emergencia dulce",
       "precio": 0.5
     }
   ],

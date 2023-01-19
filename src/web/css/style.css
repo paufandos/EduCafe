@@ -1187,6 +1187,9 @@ table {
   margin: 12px;
   cursor: pointer;
 }
+.c-icon--grey {
+  color: #454444;
+}
 .c-icon--alternativo {
   color: #487F5D;
   margin: 12px;
@@ -1212,6 +1215,9 @@ table {
 .c-icon--small {
   margin: 6px;
   font-size: 20px;
+}
+.c-icon--big {
+  font-size: 80px;
 }
 
 .c-img {
@@ -1339,6 +1345,9 @@ table {
 .c-modal--fit-content {
   width: fit-content;
 }
+.c-modal--xxsmall {
+  width: 25vw;
+}
 .c-modal--xsmall {
   width: 35vw;
 }
@@ -1417,6 +1426,16 @@ table {
   text-align: justify;
   font-family: Quicksand, sans-serif;
   color: #F2EFE8;
+}
+.c-text--dark {
+  color: #823f44;
+  font-weight: 700;
+}
+.c-text--medium {
+  font-size: 20px;
+}
+.c-text--center {
+  text-align: center;
 }
 
 .c-title {
@@ -3410,6 +3429,10 @@ table {
 
 .g--font-size-5xl {
   font-size: 40px;
+}
+
+.g--font-size-6xl {
+  font-size: 80px;
 }
 
 .g--font-family-principal {

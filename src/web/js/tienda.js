@@ -307,7 +307,7 @@ function historialCarritos(id_usuario) {
             asignarEvento("fa-eye", "click", verDetalleCarrito);
             asignarEvento("pagar", "click", modalPago);
             asignarEvento("recuperar", "click", recuperarCarrito);
-            asignarEvento("borrar", "click", borrarCarrito);
+            asignarEvento("borrar", "click", confirmarBorrar);
 
             //Añadimos la animación de salida al modal
             animacionSalidaModal("historialCarritoModal");
@@ -366,7 +366,7 @@ function verDetalleCarrito(carritoId) {
                 //Asignamos los eventos a los botones
                 asignarEvento("pagarDetalleCarrito", "click", modalPago);
                 asignarEvento("recuperarDetalleCarrito", "click", recuperarCarrito);
-                asignarEvento("borrarDetalleCarrito", "click", borrarCarrito);
+                asignarEvento("borrarDetalleCarrito", "click", confirmarBorrar);
 
                 //Añadimos la animación de salida al modal
                 animacionSalidaModal("detalleCarritoModal");
@@ -464,11 +464,15 @@ function pintarCarritoRecuperado(carritoId) {
     .catch(e => console.log(e));
 }
 
+function confirmarBorrar(carritoId){
+    confirmar(carritoId);
+}
+
 function borrarCarrito(carritoId) {
     request("DELETE", "carritos/" + carritoId, null)
     .then(res => {
         console.log(res);
         historialCarritos(activeUser.id);
     })
-    .catch(e => console.log(e));;
+    .catch(e => console.log(e));
 }

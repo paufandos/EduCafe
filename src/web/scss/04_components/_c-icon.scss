@@ -4,6 +4,10 @@
     margin: getMargin(5);
     cursor: pointer;
 
+    &--grey{
+        color: getColors("gris", 5)
+    }
+
     &--alternativo {
         color: getColors("alternativo", 3);
         margin: getMargin(5);
@@ -35,5 +39,9 @@
     &--small{
         margin: getMargin(2);
         font-size: getFontSize("xl");
+    }
+
+    &--big{
+        font-size: getFontSize("6xl");
     }
 }

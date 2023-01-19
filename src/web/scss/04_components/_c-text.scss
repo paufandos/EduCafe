@@ -2,4 +2,16 @@
     text-align: justify;
     font-family: getFontFamily("principal");
     color: getColors("principal",7);
+
+    &--dark{
+        color: getColors("principal", 0);
+        font-weight: 700;
+    }
+    &--medium{
+        font-size: getFontSize("xl");
+    }
+
+    &--center{
+        text-align: center;
+    }
 }

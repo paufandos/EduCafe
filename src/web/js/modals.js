@@ -135,3 +135,26 @@ function modalPago(id_carrito) {
     asignarEvento("confirmarPago", "click", realizarPago)
     dialog.showModal();
 }
+
+function confirmar(carritoId) {
+    let dialog = document.getElementById("confirmacion");
+    dialog.close();
+
+    dialog.classList = "c-modal c-modal--xxsmall confirmacionModal";
+    dialog.innerHTML =  `<div class="c-bubble">
+                        <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between">
+                                <div class="c-title c-title--medium">Eliminar</div>
+                        </div>
+                        <div class="g--text-align-center g--margin-7">
+                            <i class="c-icon c-icon--grey c-icon--big fa-solid fa-trash-can"></i>
+                            <div class="c-text c-text--dark c-text--medium c-text--center">¿Desea eliminar el carrito con id ${carritoId}?</div>
+                        </div>
+                        <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                            <button id="botonAceptar" class="c-button">Eliminar</button>
+                            <button id="botonCancelar" class="c-button close">Cancelar</button>
+                        </div>`;
+                        
+    document.getElementById("botonAceptar").onclick = () => {borrarCarrito(carritoId);dialog.close()};
+    animacionSalidaModal("confirmacionModal");
+    dialog.showModal();
+}
