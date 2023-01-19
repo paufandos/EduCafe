@@ -155,6 +155,6 @@ function confirmar(carritoId) {
                         </div>`;
                         
     document.getElementById("botonAceptar").onclick = () => {borrarCarrito(carritoId);dialog.close()};
-    animacionSalidaModal("confirmacionModal");
+    animacionSalidaModal("confirmacionModal", "c-modal--close");
     dialog.showModal();
 }
