@@ -3,8 +3,9 @@
     color: getColors("principal", 0);
     margin: getMargin(5);
     cursor: pointer;
+    position: relative;
 
-    &--grey{
+    &--grey {
         color: getColors("gris", 5)
     }
 
@@ -23,25 +24,45 @@
         font-size: getFontSize("2xl");
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             color: #541C24;
         }
 
-        &-light{
+        &-light {
             color: getColors("principal", 6);
 
-            &:hover{
+            &:hover {
                 color: getColors("principal", 4);
             }
         }
     }
 
-    &--small{
+    &--small {
         margin: getMargin(2);
         font-size: getFontSize("xl");
     }
 
-    &--big{
+    &--xsmall {
+        font-size: getFontSize("l");
+    }
+
+    &__burbuja {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+
+        background-color: getColors("principal", 3);
+        border-radius: getBorderRadius(5);
+
+        font-family: getFontFamily("principal");
+
+        padding-left: getPadding(3);
+        padding-right: getPadding(3);
+        padding-bottom: getPadding(1);
+        padding-top: getPadding(1);
+    }
+
+    &--big {
         font-size: getFontSize("6xl");
     }
 }

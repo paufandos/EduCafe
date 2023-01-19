@@ -1186,6 +1186,7 @@ table {
   color: #823f44;
   margin: 12px;
   cursor: pointer;
+  position: relative;
 }
 .c-icon--grey {
   color: #454444;
@@ -1215,6 +1216,21 @@ table {
 .c-icon--small {
   margin: 6px;
   font-size: 20px;
+}
+.c-icon--xsmall {
+  font-size: 18px;
+}
+.c-icon__burbuja {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: #BAA187;
+  border-radius: 16px;
+  font-family: Quicksand, sans-serif;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+  padding-top: 4px;
 }
 .c-icon--big {
   font-size: 80px;

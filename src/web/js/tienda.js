@@ -157,6 +157,7 @@ function anyadirArticulo(id) {
                 "cantidad": 1
             }
             carrito.anyadeArticulo(nuevoArticulo);
+            carrito.numeroArticulosTotal()
             window.localStorage.setItem("carrito", JSON.stringify(carrito))
         })
         .catch(e => console.log(e + " no se ha encontrado articulo"))
