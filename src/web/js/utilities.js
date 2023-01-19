@@ -12,7 +12,11 @@ function request(method, parametro, body = null) {
     let xhr = new XMLHttpRequest();
     xhr.open(method, `http://localhost:3000/${parametro}`);
     xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
-    xhr.send(JSON.stringify(body));
+    if(body!=null){
+      body = JSON.stringify(body);
+    }
+    xhr.send(body);
+
     xhr.onload = () => {
       if ((xhr.status == 200 && JSON.parse(xhr.response).length != 0) || xhr.status == 201) {
         resolve(JSON.parse(xhr.response));

@@ -262,8 +262,7 @@ function changeLogInInterface(user) {
 
 function historialCarritos(id_usuario) {
     let dialog = document.getElementById("dialog");
-    dialog.close();
-
+    
     //Añadimos el encabezado del modal a la etiqueta dialog
     dialog.classList = "c-modal c-modal--large historialCarritoModal";
     dialog.innerHTML = `<div id='modalHistorialCarrito' class='c-bubble'>
@@ -312,13 +311,17 @@ function historialCarritos(id_usuario) {
 
             //Añadimos la animación de salida al modal
             animacionSalidaModal("historialCarritoModal");
-            dialog.showModal();
+            if (!dialog.open) {
+                // dialog.close();
+                dialog.showModal();
+            }
         });
 }
 
 function verDetalleCarrito(carritoId) {
-    console.log("Detalle carrito - " + carritoId)
+    console.log("Detalle"+carritoId);
 }
+
 
 function realizarPago(carritoId) {
     let formData = new FormData(document.forms.formPago);
@@ -344,9 +347,58 @@ function realizarPago(carritoId) {
 }
 
 function recuperarCarrito(carritoId) {
-    console.log("Recuperar carrito - " + carritoId)
+    //Petición para recuperar el carrito actual (devuelve un array)
+    request("GET", "carritoActual/"+activeUser.id, null)
+    .then(c => {
+        //Con el id, localizamos del array el carrito actual y modificamos su estado para que deje de ser el actual
+        request("PATCH", "carritos/"+c[0].id, {"estado": 1})
+        .then(() => {
+            //Petición para marcar como actual el carrito seleccionado por el usuario
+            request("PATCH", "carritos/"+carritoId, {"estado": 2})
+            .then(() => {
+                //Vaciamos el carrito
+                c.productos = [];
+                window.localStorage.setItem("carrito", JSON.stringify(c)); 
+                //Pintamos el nuevo carrito
+                pintarCarritoRecuperado(carritoId);           
+            })
+            .catch(e => console.log(e));
+        })
+        .catch(e => console.log(e));
+    })
+    .catch(() => {
+        //Petición para cuando no existe un carrito actual
+        request("PATCH", "carritos/"+carritoId, {"estado": 2})
+        .then(() => pintarCarritoRecuperado(carritoId))
+        .catch(e => console.log(e));
+    });
+}
+
+function pintarCarritoRecuperado(carritoId) {
+    //Petición para recuperar el carrito seleccionado por el usuario
+    request("GET", "carritos/" + carritoId, null)
+    .then(carritoActual => {
+        console.log(carritoActual);
+        carritoActual.productos.forEach(p => {
+            // carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")));
+            carrito = carritoSerialize(carritoActual);
+            let nuevoArticulo = {
+                "id_producto": p.id_producto,
+                "cantidad": p.cantidad--
+            }
+            carrito.anyadeArticulo(nuevoArticulo);
+            window.localStorage.setItem("carrito", JSON.stringify(carrito));
+            carrito.actualizarCarrito();
+        }) 
+    })
+    .catch(e => console.log(e));
 }
 
 function borrarCarrito(carritoId) {
-    console.log("Borrar carrito - " + carritoId)
+    request("DELETE", "carritos/" + carritoId, null)
+    .then(res => {
+        console.log(res);
+        historialCarritos(activeUser.id);
+    })
+    .catch(e => console.log(e));;
 }

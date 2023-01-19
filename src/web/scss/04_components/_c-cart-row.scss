@@ -10,18 +10,16 @@
     padding-bottom: getPadding(4);
     border-bottom: 1px solid getColors("principal", 2);
 
-    &--bold {
-        font-weight: bold;
-    }
-
     &__img {
         width: 70px;
         object-fit: cover;
     }
 
-    &__footer {
-        text-align: center;
-        margin-top: getMargin(8);
-        margin-bottom: getMargin(8);
+    &--bold {
+        font-weight: bold;
+    }
+
+    &--6-columns {
+        grid-template-columns: 0.7fr 1.3fr 1.5fr 0.5fr 0.5fr 0.5fr;
     }
 }

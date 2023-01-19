@@ -319,19 +319,27 @@
     {
       "id": 1,
       "fecha": "01-02-2003",
-      "estado": 0,
+      "estado": 1,
       "id_usuario": 1,
       "productos": [
         {
           "id_producto": 1,
           "cantidad": 2
+        },
+        {
+          "id_producto": 18,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 23,
+          "cantidad": 3
         }
       ]
     },
     {
       "id": 2,
       "fecha": "01-02-2003",
-      "estado": 0,
+      "estado": 1,
       "id_usuario": 1,
       "productos": [
         {
@@ -379,12 +387,20 @@
     {
       "id": 6,
       "fecha": "01-02-2003",
-      "estado": 1,
+      "estado": 2,
       "id_usuario": 1,
       "productos": [
         {
-          "id_producto": 1,
+          "id_producto": 15,
+          "cantidad": 1
+        },
+        {
+          "id_producto": 32,
           "cantidad": 2
+        },
+        {
+          "id_producto": 39,
+          "cantidad": 3
         }
       ]
     },

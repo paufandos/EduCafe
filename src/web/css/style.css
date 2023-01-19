@@ -1156,17 +1156,15 @@ table {
   padding-bottom: 10px;
   border-bottom: 1px solid #AB896D;
 }
-.c-cart-row--bold {
-  font-weight: bold;
-}
 .c-cart-row__img {
   width: 70px;
   object-fit: cover;
 }
-.c-cart-row__footer {
-  text-align: center;
-  margin-top: 24px;
-  margin-bottom: 24px;
+.c-cart-row--bold {
+  font-weight: bold;
+}
+.c-cart-row--6-columns {
+  grid-template-columns: 0.7fr 1.3fr 1.5fr 0.5fr 0.5fr 0.5fr;
 }
 
 .c-footer {

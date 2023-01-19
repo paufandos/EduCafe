@@ -57,7 +57,7 @@ class Carrito {
 				let htmlProductos = response[0];
 				let precioTotal = response[1];
 				htmlCarrito += htmlProductos
-				htmlCarrito += `	<div class="c-cart-row__footer l-flex l-flex--align-items-center l-flex--justify-content-space-between">
+				htmlCarrito += `	<div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-vertical-8">
 										<div class="c-title">Importe: ${precioTotal.toFixed(2)}€</div>
 										<button id="pago" class="c-button">Confirmar carrito</button>
 									</div>
