@@ -319,7 +319,7 @@
     {
       "id": 1,
       "fecha": "01-02-2003",
-      "estado": 1,
+      "estado": 0,
       "id_usuario": 1,
       "productos": [
         {
@@ -387,7 +387,7 @@
     {
       "id": 6,
       "fecha": "01-02-2003",
-      "estado": 2,
+      "estado": 1,
       "id_usuario": 1,
       "productos": [
         {

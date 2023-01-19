@@ -319,9 +319,79 @@ function historialCarritos(id_usuario) {
 }
 
 function verDetalleCarrito(carritoId) {
-    console.log("Detalle"+carritoId);
+    let dialog = document.getElementById("dialog");
+    dialog.close();
+
+    //Añadimos las clases y la estructura básica del carrito en el contenedor dialog
+    dialog.classList = "c-modal c-modal--medium detalleCarritoModal";
+    let htmlCarritoDetalle = `<div class="c-bubble">
+                                    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                                        <div class="c-title">Carrito ${carritoId}</div>
+                                        <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                                    </div>
+                                    <div class="c-cart-row c-cart-row--bold c-cart-row--6-columns">
+                                        <div></div>
+                                        <div>Nombre</div>
+                                        <div>Descripción</div>
+                                        <div>Precio</div>
+                                        <div>Unidades</div>
+                                        <div>Total</div>
+                                    </div>`
+
+    //Hacemos la petición para obtener los datos del carrito
+    request("GET", "carritos/" + carritoId, null)
+        .then(carrito => {
+            //Llamamos al método que devuelve los productos
+            getProductsDetalleCarrito(carrito.productos)
+            .then(response => {
+                let htmlProductos = response[0];
+                let precioTotal = response[1];
+                htmlCarritoDetalle += htmlProductos
+                htmlCarritoDetalle += `	    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-vertical-8">
+                                                <div class="c-title">Importe: ${precioTotal.toFixed(2)}€</div>
+                                                <div id="detalleCarrito-${carrito.id}" class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-vertical-8"></div>
+                                            </div>
+                                       </div>`;
+                
+                // Pintamos el html
+                dialog.innerHTML = htmlCarritoDetalle;
+                
+                // Añadimos los botones en los carritos pendientes de pago
+                if (carrito.estado != 0) {
+                    document.getElementById("detalleCarrito-" + carrito.id).innerHTML = `<div class="pagarDetalleCarrito c-cart-list__item"><button class="c-button">Pagar</button></div>
+                                                                                         <div class="recuperarDetalleCarrito c-cart-list__item"><button class="c-button">Recuperar</button></div>
+                                                                                         <div class="borrarDetalleCarrito c-cart-list__item"><button class="c-button c-button--danger">Borrar</button></div>`;                     
+                }
+
+                //Asignamos los eventos a los botones
+                asignarEvento("pagarDetalleCarrito", "click", modalPago);
+                asignarEvento("recuperarDetalleCarrito", "click", recuperarCarrito);
+                asignarEvento("borrarDetalleCarrito", "click", borrarCarrito);
+
+                //Añadimos la animación de salida al modal
+                animacionSalidaModal("detalleCarritoModal");
+                dialog.showModal();
+            });
+        });
 }
 
+async function getProductsDetalleCarrito(productos) {
+    let htmlProductos = "";
+    let precioTotal = 0
+    for (const product of productos) {
+        let p = await request("GET", "productos/" + product.id_producto)
+        htmlProductos += `<div class="c-cart-row c-cart-row--6-columns">
+                            <img src="./assets/img/fotosProductos/producto_${p.id}.jpg" class="c-cart-row__img">
+                            <div>${p.nombre}</div>
+                            <div>${p.descripcion}</div>
+                            <div>${p.precio.toFixed(2)}€</div>
+                            <div>${product.cantidad}</div>
+                            <div>${(p.precio * product.cantidad).toFixed(2)}€</div>
+                        </div>`;
+        precioTotal += p.precio * product.cantidad;
+    }
+    return [htmlProductos, precioTotal];
+}
 
 function realizarPago(carritoId) {
     let formData = new FormData(document.forms.formPago);
