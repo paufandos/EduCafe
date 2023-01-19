@@ -327,7 +327,7 @@ function verDetalleCarrito(carritoId) {
     let htmlCarritoDetalle = `<div class="c-bubble">
                                     <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
                                         <div class="c-title">Carrito ${carritoId}</div>
-                                        <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                                        <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark volverHistorial"></i>
                                     </div>
                                     <div class="c-cart-row c-cart-row--bold c-cart-row--6-columns">
                                         <div></div>
@@ -367,9 +367,8 @@ function verDetalleCarrito(carritoId) {
                 asignarEvento("pagarDetalleCarrito", "click", modalPago);
                 asignarEvento("recuperarDetalleCarrito", "click", recuperarCarrito);
                 asignarEvento("borrarDetalleCarrito", "click", confirmarBorrar);
+                document.getElementsByClassName("volverHistorial")[0].addEventListener("click", () => historialCarritos(activeUser.id));
 
-                //Añadimos la animación de salida al modal
-                animacionSalidaModal("detalleCarritoModal");
                 dialog.showModal();
             });
         });
