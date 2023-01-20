@@ -3,13 +3,13 @@ let activeUser
 let carrito;
 
 window.onload = () => {
-    localStorage.clear()
+    localStorage.clear();
     if (!localStorage.getItem('carrito')) {
         if (!localStorage.getItem("isLogin") == "true") {
-            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2, activeUser.id);
+            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 1, activeUser.id);
             window.localStorage.setItem("carrito", JSON.stringify(carrito));
         } else {
-            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2)
+            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 1)
             window.localStorage.setItem("carrito", JSON.stringify(carrito));
         }
     }
@@ -206,7 +206,7 @@ function iniciarSesion(e) {
         .then(u => {
             let usuario = u[0];
             if (usuario.password == user.password) {
-                registrarInicioSeison(usuario, "Bienvenido a EduCafé " + usuario.nombre + "!")
+                registrarInicioSeison(usuario, "Bienvenido a EduCafé, " + usuario.nombre + "!")
             } else {
                 alert("Contraseña incorrecta")
             }
@@ -267,11 +267,11 @@ function changeLogInInterface(user) {
                             </div>
                             <hr class="g--margin-vertical-8 g--color-principal-1">
                             <div id="user-${user.id}" class="l-flex l-flex--align-items-center l-flex--justify-content-center g--margin-bottom-4">
-                                <div class="historialCarritos l-flex l-flex--align-items-center l-flex--justify-content-left g--margin-4">
+                                <div class="historialCarritos l-flex l-flex--align-items-center l-flex--justify-content-left g--margin-1">
                                     <i class="c-icon c-icon--2xl fa-solid fa-bars"></i>
                                     <div class="c-title c-title--xl c-title--left">Historial de carritos</div>
                                 </div>
-                                <div class="historialPagos l-flex l-flex--align-items-center l-flex--justify-content-left g--margin-4">
+                                <div class="historialPagos l-flex l-flex--align-items-center l-flex--justify-content-left g--margin-1">
                                     <i class="c-icon c-icon--2xl fa-solid fa-file-invoice-dollar"></i>
                                     <div class="c-title c-title--xl c-title--left">Historial de pagos</div>
                                 </div>
@@ -313,7 +313,7 @@ function historialCarritos(id_usuario) {
                                 Carrito ${carrito.id}
                             </div>
                             <div class="c-cart-list__item c-cart-list__item--right">${ESTADO_CARRITO[carrito.estado]}</div>`;
-                if (carrito.estado == 1) {
+                if (carrito.estado != 0) {
                     html += `
                             <div id="cartPay-${carrito.id}" class="c-cart-list__item">
                                 <button class="c-button pagar">Pagar</button>
@@ -514,7 +514,7 @@ function recuperarCarrito(carritoId) {
                             c.productos = [];
                             
                             window.localStorage.setItem("carrito", JSON.stringify(c));
-                            c.numeroArticulosTotal()
+                            
                             //Pintamos el nuevo carrito
                             pintarCarritoRecuperado(carritoId);
                         })
@@ -557,7 +557,9 @@ function confirmarBorrar(carritoId) {
 function borrarCarrito(carritoId) {
     request("DELETE", "carritos/" + carritoId, null)
         .then(res => {
-            console.log(res);
+            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2, activeUser.id);
+            window.localStorage.setItem("carrito", JSON.stringify(carrito));
+            carrito.numeroArticulosTotal();
             historialCarritos(activeUser.id);
         })
         .catch(e => console.log(e));

@@ -996,7 +996,7 @@ table {
 
 .c-alert {
   display: none;
-  position: absolute;
+  position: fixed;
   z-index: 9999;
   left: 20px;
   top: 20px;
@@ -1449,7 +1449,7 @@ table {
 .c-modal::backdrop {
   position: absolute;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
 }
 @keyframes show {
   from {
@@ -1479,6 +1479,7 @@ table {
   position: fixed;
   width: 100%;
   background-color: #D6C9B8;
+  z-index: 10;
 }
 .c-nav__item {
   margin-top: 8px;

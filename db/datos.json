@@ -308,9 +308,181 @@
     }
   ],
   "usuarios": [
+    {
+      "nombre": "Jose Luis ",
+      "apellidos": "Coloma Tormo",
+      "correo": "joseluis@gmail.com",
+      "password": "1234",
+      "id": 1
+    },
+    {
+      "nombre": "Pau ",
+      "apellidos": "Fandos Gorris",
+      "correo": "fandosgorrispau@gmail.com",
+      "password": "1234",
+      "id": 2
+    }
   ],
   "carritos": [
+    {
+      "id": 1674200412599,
+      "fecha": "20-00-2023",
+      "estado": 0,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "23",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "22",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674200512390,
+      "fecha": "20-00-2023",
+      "estado": 0,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "11",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "15",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "14",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674200868769,
+      "fecha": "20-00-2023",
+      "estado": 1,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "23",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "22",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674200891059,
+      "fecha": "20-00-2023",
+      "estado": 1,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "4",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "3",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674201078071,
+      "fecha": "20-00-2023",
+      "estado": 2,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "23",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674201588337,
+      "fecha": "20-00-2023",
+      "estado": 1,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 2
+        },
+        {
+          "id_producto": "23",
+          "cantidad": 3
+        },
+        {
+          "id_producto": "21",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674201788671,
+      "fecha": "20-00-2023",
+      "estado": 1,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "23",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674201853424,
+      "fecha": "20-00-2023",
+      "estado": 1,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        }
+      ]
+    }
   ],
   "pagos": [
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "1111-1111-1111-1111",
+      "codigoSeguridad": "234",
+      "fechaCaducidad": "13/32",
+      "id_carrito": "1674200412599",
+      "id_usuario": 2,
+      "id": 1
+    },
+    {
+      "nombreTarjeta": "PAU FANDOS GORRIS",
+      "numeroTarjeta": "1111-1111-1111-1111",
+      "codigoSeguridad": "234",
+      "fechaCaducidad": "23/42",
+      "id_carrito": "1674200512390",
+      "id_usuario": 2,
+      "id": 2
+    }
   ]
 }

@@ -2,6 +2,7 @@
     position: fixed;
     width: 100%;
     background-color: getColors("principal", 5);
+    z-index: 10;
 
     &__item {
         margin-top: getMargin(3);

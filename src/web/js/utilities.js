@@ -22,7 +22,7 @@ function request(method, parametro, body = null) {
     
 
     xhr.onload = () => {
-      if ((xhr.status == 200 && JSON.parse(xhr.response).length != 0) || xhr.status == 201) {
+      if ((xhr.status == 200 && JSON.parse(xhr.response).length != 0) || xhr.status == 201 || xhr.status == 304) {
         resolve(JSON.parse(xhr.response));
       } else {
         let e = { "statusCode": xhr.status, "statusText": xhr.statusText };
