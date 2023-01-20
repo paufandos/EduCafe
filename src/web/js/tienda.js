@@ -6,10 +6,10 @@ window.onload = () => {
     localStorage.clear();
     if (!localStorage.getItem('carrito')) {
         if (!localStorage.getItem("isLogin") == "true") {
-            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 1, activeUser.id);
+            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2, activeUser.id);
             window.localStorage.setItem("carrito", JSON.stringify(carrito));
         } else {
-            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 1)
+            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2)
             window.localStorage.setItem("carrito", JSON.stringify(carrito));
         }
     }
@@ -287,8 +287,14 @@ function changeLogInInterface(user) {
 }
 
 function cerrarSesion() {
-    localStorage.clear();
-    location.reload();
+    request("GET", "carritoActual/" + activeUser.id, null)
+        .then(c => {
+            request("PATCH", "carritos/" + c[0].id, { "estado": 1 }).then(() => {
+                localStorage.clear();
+                location.reload();
+            })
+        })
+
 }
 
 function historialCarritos(id_usuario) {
@@ -369,7 +375,7 @@ function historialPagos(id_usuario) {
                                 Pago ${pago.id}</b>
                             </div>
                             <div class="c-cart-list__item">${pago.nombreTarjeta}</div>
-                            <div class="c-cart-list__item">**** ${pago.numeroTarjeta.substring(pago.numeroTarjeta.length-4, pago.numeroTarjeta.length)}</div>
+                            <div class="c-cart-list__item">**** ${pago.numeroTarjeta.substring(pago.numeroTarjeta.length - 4, pago.numeroTarjeta.length)}</div>
                             <div class="c-cart-list__item">${pago.id_carrito}</div>
                         </div>`
             });
@@ -432,10 +438,10 @@ function verDetalleCarrito(carritoId, volver) {
                     asignarEvento("borrarDetalleCarrito", "click", confirmarBorrar);
                     if (volver == "pago") {
                         document.getElementsByClassName("volverHistorial")[0].addEventListener("click", () => historialPagos(activeUser.id));
-                    }else{
+                    } else {
                         document.getElementsByClassName("volverHistorial")[0].addEventListener("click", () => historialCarritos(activeUser.id));
                     }
-                    
+
 
                     dialog.showModal();
                 });
@@ -469,13 +475,13 @@ function realizarPago(carritoId) {
     if (!newPay["nombreTarjeta"] || !newPay["numeroTarjeta"] || !newPay["mesTarjeta"] || !newPay["anyoTarjeta"] || !newPay["codigoSeguridad"]) {
         alert("Por favor rellene todos los campos", "Datos incorrectos");
         return;
-    }else if (!checkPattern("nombreTarjeta", /[a-zA-Z\s]$/)) {
+    } else if (!checkPattern("nombreTarjeta", /[a-zA-Z\s]$/)) {
         alert("El formato del nombre de la tarjeta es incorrecto, no puede contener números o carácteres especiales.", "Formato de datos");
         return;
-    }else if(!checkPattern("numeroTarjeta", /[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/)){
+    } else if (!checkPattern("numeroTarjeta", /[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/)) {
         alert("El formato del número de tarejeta es incorrecto, debe seguir el formato XXXX-XXXX-XXXX-XXXX.", "Formato de datos");
         return;
-    }else if(!checkPattern("codigoSeguridad", /[0-9]{3}/)){          
+    } else if (!checkPattern("codigoSeguridad", /[0-9]{3}/)) {
         alert("El formato deL código de seguridad es incorrecto, deben ser 3 números.", "Formato de datos");
         return;
     } else {
@@ -512,9 +518,9 @@ function recuperarCarrito(carritoId) {
                         .then(() => {
                             //Vaciamos el carrito
                             c.productos = [];
-                            
+
                             window.localStorage.setItem("carrito", JSON.stringify(c));
-                            
+
                             //Pintamos el nuevo carrito
                             pintarCarritoRecuperado(carritoId);
                         })

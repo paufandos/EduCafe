@@ -396,14 +396,14 @@
         },
         {
           "id_producto": "3",
-          "cantidad": 1
+          "cantidad": 4
         }
       ]
     },
     {
       "id": 1674201078071,
       "fecha": "20-00-2023",
-      "estado": 2,
+      "estado": 1,
       "id_usuario": 2,
       "productos": [
         {
@@ -460,6 +460,38 @@
       "productos": [
         {
           "id_producto": "24",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674203362663,
+      "fecha": "20-00-2023",
+      "estado": 1,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "23",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674203425360,
+      "fecha": "20-00-2023",
+      "estado": 1,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "23",
           "cantidad": 1
         }
       ]
