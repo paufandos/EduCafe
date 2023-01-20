@@ -36,14 +36,14 @@
             }
         }
     }
-
-    &--small {
+    &--2xl{
         margin: getMargin(2);
         font-size: getFontSize("xl");
     }
-
-    &--xsmall {
-        font-size: getFontSize("l");
+    
+    &--small {
+        margin: getMargin(2);
+        font-size: getFontSize("xl");
     }
 
     &__burbuja {

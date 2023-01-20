@@ -22,4 +22,7 @@
     &--6-columns {
         grid-template-columns: 0.7fr 1.3fr 1.5fr 0.5fr 0.5fr 0.5fr;
     }
+    &--4-columns {
+        grid-template-columns: 1.5fr 2fr 1.5fr 2fr;
+    }
 }

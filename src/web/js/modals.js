@@ -39,7 +39,7 @@ function modalLogin() {
 
         animacionSalidaModal("loginModal", "c-modal--close");
         document.getElementById("registro").onclick =  modalRegistro;
-        document.getElementById("formLogin").onsubmit = () => iniciarSesion(event, dialog);
+        document.getElementById("formLogin").onsubmit = (event) => iniciarSesion(event);
         dialog.showModal();
     }
 }
@@ -100,8 +100,8 @@ function modalPago(id_carrito) {
                                     placeholder="Tal y como aparece en la tarjeta">
                             
                                 <label class="c-label" for="numeroTarjeta">Número de la Tarjeta</label>
-                                <input id="numeroTarjeta" class="c-input c-input--w-100" name="numeroTarjeta" type="password" size="47"
-                                    placeholder="Números sin separaciones">
+                                <input id="numeroTarjeta" class="c-input c-input--w-100" name="numeroTarjeta" type="text" size="47"
+                                    placeholder="XXXX-XXXX-XXXX-XXXX">
                             
                                 <div class="l-flex l-flex--justify-content-space-between">
                                     <div>

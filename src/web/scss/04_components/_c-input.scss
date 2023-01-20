@@ -18,9 +18,17 @@
         display: inline-block;
         width: 100%;
     }
+    &--w-90{
+        display: inline-block;
+        width: 90%;
+    }
     &--w-80{
         display: inline-block;
         width: 80%;
+    }
+    &--w-50{
+        display: inline-block;
+        width: 50%;
     }
 
     &:focus{

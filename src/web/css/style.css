@@ -996,7 +996,7 @@ table {
 
 .c-alert {
   display: none;
-  position: fixed;
+  position: absolute;
   z-index: 9999;
   left: 20px;
   top: 20px;
@@ -1217,6 +1217,9 @@ table {
 .c-cart-row--6-columns {
   grid-template-columns: 0.7fr 1.3fr 1.5fr 0.5fr 0.5fr 0.5fr;
 }
+.c-cart-row--4-columns {
+  grid-template-columns: 1.5fr 2fr 1.5fr 2fr;
+}
 
 .c-footer {
   text-align: center;
@@ -1264,12 +1267,13 @@ table {
 .c-icon--close-light:hover {
   color: #E3DBCE;
 }
-.c-icon--small {
+.c-icon--2xl {
   margin: 6px;
   font-size: 20px;
 }
-.c-icon--xsmall {
-  font-size: 18px;
+.c-icon--small {
+  margin: 6px;
+  font-size: 20px;
 }
 .c-icon__burbuja {
   position: absolute;
@@ -1323,9 +1327,17 @@ table {
   display: inline-block;
   width: 100%;
 }
+.c-input--w-90 {
+  display: inline-block;
+  width: 90%;
+}
 .c-input--w-80 {
   display: inline-block;
   width: 80%;
+}
+.c-input--w-50 {
+  display: inline-block;
+  width: 50%;
 }
 .c-input:focus {
   outline: 0 !important;
@@ -1435,6 +1447,8 @@ table {
   width: 80vw;
 }
 .c-modal::backdrop {
+  position: absolute;
+  z-index: 10;
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 @keyframes show {
@@ -1534,11 +1548,18 @@ table {
 .c-title--medium {
   font-size: 24px;
 }
+.c-title--xl {
+  font-size: 20px;
+  font-weight: 700;
+}
 .c-title--small {
   font-size: 18px;
 }
 .c-title--lighter {
   color: #FFFFFF;
+}
+.c-title--left {
+  text-align: left;
 }
 
 .g--background-color-principal-0 {

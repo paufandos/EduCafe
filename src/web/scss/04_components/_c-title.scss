@@ -19,12 +19,21 @@
         font-size: getFontSize("2xl");
     }
 
+    &--xl{
+        font-size: getFontSize("xl");
+        font-weight: 700;
+    }
+
     &--small{
         font-size: getFontSize("l");
     }
 
     &--lighter{
         color: getColors("principal", 8);
+    }
+
+    &--left{
+        text-align: left;
     }
     
 }

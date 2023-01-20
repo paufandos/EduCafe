@@ -35,7 +35,7 @@ class Carrito {
 		this.numeroArticulosTotal();
 	}
 
-	actualizarCarrito(isLogin) {
+	actualizarCarrito() {
 		if (this.productos != 0) {
 			let dialog = document.getElementById("dialog");
 			dialog.classList = "c-modal c-modal--large carritoModal";
@@ -60,7 +60,7 @@ class Carrito {
 				htmlCarrito += htmlProductos
 				htmlCarrito += `	<div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-vertical-8">
 										<div class="c-title">Importe: ${precioTotal.toFixed(2)}€</div>
-										<button id="pago" class="c-button">Confirmar carrito</button>
+										<button id="confirmarCarrito" class="c-button">Confirmar carrito</button>
 									</div>
 								</div`;
 				dialog.innerHTML = htmlCarrito;
@@ -70,15 +70,26 @@ class Carrito {
 				Array.from(document.getElementsByClassName("mas")).forEach(boton => boton.addEventListener("click", () => { this.modificaUnidades(boton.parentNode.parentNode.id.split("-")[1], "suma") }))
 				Array.from(document.getElementsByClassName("menos")).forEach(boton => boton.addEventListener("click", () => { this.modificaUnidades(boton.parentNode.parentNode.id.split("-")[1], "resta") }))
 				Array.from(document.getElementsByClassName("eliminar")).forEach(boton => boton.addEventListener("click", () => { this.borraArticulo(boton.parentNode.parentNode.id.split("-")[1]) }))
-				document.getElementById("pago").onclick = () => {
+				document.getElementById("confirmarCarrito").onclick = () => {
 					if (localStorage.getItem("isLogin") == "true") {
-						this.id_usuario = userSerialize(JSON.parse(window.localStorage.getItem("user"))).id;
-						request("POST", "carritos", this)
+						request("GET", "carritos/" + this.id, null)
 							.then(() => {
-								alert("El carrito con id " + this.id + " ha sido guardado correctamente", "Aviso")
-								modalPago(this.id);
+								request("PUT", "carritos/" + this.id, this)
+									.then(() => {
+										alert("El carrito con id " + this.id + " ha sido guardado correctamente", "Aviso")
+										modalPago(this.id);
+									})
+									.catch(alert("No se ha podido guardar el carrito correctamente.", "ERROR"))
 							})
-							.catch(alert("No se ha podido guardar el carrito correctamente.", "ERROR"))
+							.catch(() => {
+								request("POST", "carritos", this)
+									.then(() => {
+										alert("El carrito con id " + this.id + " ha sido guardado correctamente", "Aviso")
+										modalPago(this.id);
+									})
+									.catch(alert("No se ha podido guardar el carrito correctamente.", "ERROR"))
+							})
+
 					} else {
 						document.getElementById("dialog").close()
 						alert("Es necesario estar registrado para realizar esta operación.", "Registrate")
@@ -99,7 +110,6 @@ class Carrito {
 
 		this.productos.forEach(element => {
 			numProductos += element.cantidad;
-			console.log(numProductos)
 		});
 		let burbuja = document.getElementById("cart_menu_num");
 		burbuja.innerHTML = numProductos;

@@ -6,12 +6,15 @@ window.onload = () => {
     localStorage.clear()
     if (!localStorage.getItem('carrito')) {
         if (!localStorage.getItem("isLogin") == "true") {
-            console.log(activeUser.id)
-            window.localStorage.setItem("carrito", JSON.stringify(new Carrito(Date.now(), new Date().getFormattedDate(), 1, activeUser.id)));
+            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2, activeUser.id);
+            window.localStorage.setItem("carrito", JSON.stringify(carrito));
         } else {
-            window.localStorage.setItem("carrito", JSON.stringify(new Carrito(Date.now(), new Date().getFormattedDate(), 1)));
+            carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2)
+            window.localStorage.setItem("carrito", JSON.stringify(carrito));
         }
     }
+    carritoSerialize(JSON.parse(localStorage.getItem("carrito"))).numeroArticulosTotal()
+
     if (!localStorage.getItem("isLogin")) {
         localStorage.setItem("isLogin", "false")
     }
@@ -26,9 +29,7 @@ window.onload = () => {
 
 //TIENDA
 function mostrarCategorias() {
-    //promesa para pintar las categorias
     request("GET", "categorias", null)
-        //resolve de la promesa
         .then(listadoCategorias => {
             let main = document.getElementById("main");
             main.innerHTML = `<div id="categorias" class="l-columns-3"></div>`;
@@ -88,15 +89,13 @@ function mostrarDetalleProducto(idProducto) {
     let dialog = document.getElementById("dialog");
     dialog.close();
 
-    //promesa para pintar las categorias
     request("GET", "productos", null)
-        //resolve de la promesa
         .then(listadoProductos => {
             let articulo = listadoProductos.find(p => p.id == idProducto);
             dialog.classList = "c-modal c-modal--small detalleProductoModal";
             dialog.innerHTML = `<div class="c-bubble">
                                     <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
-                                        <div class="c-title">${articulo.nombre}</div>
+                                        <div class="c-title">${articulo.nombre.toUpperCase()}</div>
                                         <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
                                     </div>
                                     <div class="l-flex l-flex--justify-content-center">
@@ -152,7 +151,7 @@ function anyadirArticulo(id) {
 
 //USUARIO
 function userSerialize(user) {
-    return new User(user.id, user.nombre, user.correo)
+    return new User(user.id, user.nombre, user.apellidos, user.correo)
 }
 
 function registrarUsuario() {
@@ -170,21 +169,26 @@ function registrarUsuario() {
         alert("Las contraseñas no coinciden");
         return;
     }
+    if (!checkPattern("correo", /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$/)) {
+        alert("El formato del correo electrónico debe ser exapmle@example.example", "Formato de datos");
+        return;
+    }
+    console.log(!checkPattern("nombre", /[a-zA-Z\s]+/))
+    if (!checkPattern("nombre", /[a-zA-Z\s]+/) || !checkPattern("apellidos", /[a-zA-Z\s]+/)) {
+        alert("Tu nombre y apellidos no puede contener números.", "Formato de datos");
+        return;
+    }
 
     delete newUser.confirmPassword;
 
     request("POST", "usuarios", newUser)
         .then((usuario) => {
-            console.log(usuario)
-            alert("Bienvenido <b>" + newUser.nombre + "</b>, se ha completado tu registro correctamente.", "Bienvenido")
-            window.localStorage.setItem("isLogin", "true");
-            window.localStorage.setItem("user", JSON.stringify(new User(usuario.id, usuario.nombre, usuario.correo)));
-            activeUser = userSerialize(JSON.parse(window.localStorage.getItem("user")));
-            document.getElementById("dialog").close();
-        }).catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
+            registrarInicioSeison(usuario, "Bienvenido " + usuario.nombre + ", te has registrado con éxito!")
+        })
+        .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
 }
 
-function iniciarSesion(e, dialog) {
+function iniciarSesion(e) {
     e.preventDefault();
 
     let formData = new FormData(document.forms.formLogin);
@@ -200,108 +204,133 @@ function iniciarSesion(e, dialog) {
 
     request("GET", "login/" + user.usuario)
         .then(u => {
-            usuario = u[0];
+            let usuario = u[0];
             if (usuario.password == user.password) {
-                window.localStorage.setItem("isLogin", "true");
-                window.localStorage.setItem("user", JSON.stringify(new User(usuario.id, usuario.nombre, usuario.correo)));
-                activeUser = userSerialize(JSON.parse(window.localStorage.getItem("user")));
-                alert("Bienvenido <b>" + activeUser.nombre + "</b>", "Bienvenido")
-                dialog.close()
+                registrarInicioSeison(usuario, "Bienvenido a EduCafé " + usuario.nombre + "!")
             } else {
                 alert("Contraseña incorrecta")
             }
         })
-        .catch(e => alert("Usuario y/o contraseña incorrectos."))
+        .catch(alert("El nombre de usuario es incorrecto."))
+}
+
+function registrarInicioSeison(usuario, mensaje) {
+    window.localStorage.setItem("isLogin", "true");
+    window.localStorage.setItem("user", JSON.stringify(new User(usuario.id, usuario.nombre, usuario.apellidos, usuario.correo)));
+    activeUser = userSerialize(JSON.parse(window.localStorage.getItem("user")));
+
+    carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")))
+    carrito.id_usuario = activeUser.id
+    window.localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    alert(mensaje, "Bienvenido")
+    document.getElementById("dialog").close()
 }
 
 function changeLogInInterface(user) {
-    console.log(user)
     let dialog = document.getElementById("dialog");
     dialog.close();
 
     dialog.classList = "c-modal c-modal--xsmall miCuenta";
     dialog.innerHTML = `<div class="c-bubble">
                             <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
-                                <div class="c-title c-title--medium"><i class="c-icon fa-solid fa-user"></i>Hola, ${user.nombre}!</div>
+                                <div class="c-title c-title--medium">Bienvenido, ${user.nombre}!</div>
                                 <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
                             </div>
+                            <hr class="g--margin-vertical-8 g--color-principal-1">
                             <label class="c-label" for="nombre">Nombre</label>
                             <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between">
-                                <input id="nombre" class="c-input c-input--w-80" name="nombre" type="text" value="${user.nombre}">
-                                <button id="cambiarNombre" class="c-button">Editar</button>
+                                <input id="nombre" class="c-input c-input--w-90 g--margin-right-3" name="nombre" type="text" value="${user.nombre}">
+                                <button class="c-button g--padding-horizontal-2 g--padding-vertical-1"><i class="c-icon c-icon--lighter c-icon--xsmall fa-solid fa-pen-to-square"></i></button>
+                            </div>
+                            <label class="c-label" for="apellidos">Apellidos</label>
+                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between">
+                                <input id="apellidos" class="c-input c-input--w-90 g--margin-right-3" name="apellidos" type="text" value="${user.apellidos}">
+                                <button class="c-button g--padding-horizontal-2 g--padding-vertical-1"><i class="c-icon c-icon--lighter c-icon--xsmall fa-solid fa-pen-to-square"></i></button>
                             </div>
                             <label class="c-label" for="correo">Correo electrónico</label>
                             <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between">
-                                <input id="correo" class="c-input c-input--w-80" name="correo" type="text" value="${user.correo}">
-                                <button id="cambiarCorreo" class="c-button">Editar</button>
+                                <input id="correo" class="c-input c-input--w-90 g--margin-right-3" name="correo" type="text" value="${user.correo}">
+                                <button class="c-button g--padding-horizontal-2 g--padding-vertical-1"><i class="c-icon c-icon--lighter c-icon--xsmall fa-solid fa-pen-to-square"></i></button>
                             </div>
                             <hr class="g--margin-vertical-8 g--color-principal-1">
-                            <label class="c-label" for="password">Contraseña</label>
-                            <input id="password" class="c-input c-input--w-100" type="password" name="password"
-                                placeholder="Escribe su nueva contraseña">
-                            <label class="c-label" for="confirmPassword">Confirmar contraseña</label>
-                            <input id="confirmPassword" class="c-input c-input--w-100" type="password"
-                                name="confirmPassword" placeholder="Confirme su  nueva contraseña">
-                            <div class="l-flex l-flex--justify-content-end">
-                                <button id="cambiarCorreo" class="c-button">Confirmar nueva contraseña</button>
+                            <div>
+                                <label class="c-label" for="password">Contraseña</label>
+                                <input id="password" class="c-input c-input--w-100" type="password" name="password"
+                                    placeholder="Escribe su nueva contraseña">
+                                <label class="c-label" for="confirmPassword">Confirmar contraseña</label>
+                                <input id="confirmPassword" class="c-input c-input--w-100" type="password"
+                                    name="confirmPassword" placeholder="Confirme su  nueva contraseña">
+                                <div class="l-flex l-flex--justify-content-end">
+                                    <button id="cambiarCorreo" class="c-button">Confirmar nueva contraseña</button>
+                                </div>
                             </div>
                             <hr class="g--margin-vertical-8 g--color-principal-1">
-                            <div id="user-${user.id}">
-                                <i id="cart-list_icon" class="c-icon fa-solid fa-list"></i>
-                                Historial de carritos
+                            <div id="user-${user.id}" class="l-flex l-flex--align-items-center l-flex--justify-content-center g--margin-bottom-4">
+                                <div class="historialCarritos l-flex l-flex--align-items-center l-flex--justify-content-left g--margin-4">
+                                    <i class="c-icon c-icon--2xl fa-solid fa-bars"></i>
+                                    <div class="c-title c-title--xl c-title--left">Historial de carritos</div>
+                                </div>
+                                <div class="historialPagos l-flex l-flex--align-items-center l-flex--justify-content-left g--margin-4">
+                                    <i class="c-icon c-icon--2xl fa-solid fa-file-invoice-dollar"></i>
+                                    <div class="c-title c-title--xl c-title--left">Historial de pagos</div>
+                                </div>
                             </div>
+                            <hr class="g--margin-vertical-8 g--color-principal-1">
+                            <button id="cerrarSesion" class="c-button">Cerrar sesión</button>
                         </div>`;
     animacionSalidaModal("miCuenta", "c-modal--close");
-    asignarEvento("fa-list", "click", historialCarritos);
+    asignarEvento("historialCarritos", "click", historialCarritos);
+    asignarEvento("historialPagos", "click", historialPagos);
+    document.getElementById("cerrarSesion").onclick = cerrarSesion;
     dialog.showModal()
+}
+
+function cerrarSesion() {
+    localStorage.clear();
+    location.reload();
 }
 
 function historialCarritos(id_usuario) {
     let dialog = document.getElementById("dialog");
-    
+    dialog.close()
+
     //Añadimos el encabezado del modal a la etiqueta dialog
     dialog.classList = "c-modal c-modal--large historialCarritoModal";
-    dialog.innerHTML = `<div id='modalHistorialCarrito' class='c-bubble'>
-                            <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
-                                <div class="c-title">Listado carritos</div>
-                                <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+    let html = `<div id='modalHistorialCarrito' class='c-bubble'>
+                    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                        <div class="c-title">Listado carritos</div>
+                        <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                    </div>`;
+
+
+    request("GET", "historial_carritos/" + id_usuario, null)
+        .then(carritos => {
+            Array.from(carritos).forEach(carrito => {
+                html += `<div class="c-cart-list l-flex l-flex--align-items-center">
+                            <div id="cartList-${carrito.id}" class="c-cart-list__title-cart">
+                                <i class="c-icon c-icon--small fa-solid fa-eye"></i>
+                                Carrito ${carrito.id}
                             </div>
-                        </div>`;
-
-    //Cogemos el contenedor donde irán todos los carritos
-    let modalHistorialCarrito = document.getElementById("modalHistorialCarrito");
-
-    //Preparamos y ejecutamos la petición del historial de carritos al servidor
-    const parametro = "historial_carritos/" + id_usuario;
-    const method = "get";
-    request(method, parametro, null)
-        .then(historialCarritos => {
-            console.log(historialCarritos)
-            Array.from(historialCarritos).forEach(carrito => {
-                //Pintamos todos los carritos
-                modalHistorialCarrito.innerHTML += `<div id="cartRow-${carrito.id}" class="c-cart-list l-flex l-flex--align-items-center">
-                                                        <div id="cartList-${carrito.id}" class="c-cart-list__title-cart">
-                                                            <i class="c-icon c-icon--small fa-solid fa-eye"></i>
-                                                            Carrito ${carrito.id}
-                                                        </div>
-                                                        <div class="c-cart-list__item c-cart-list__item--right">${ESTADO_CARRITO[carrito.estado]}</div>`;
-                if (carrito.estado != 0) {
-                    document.getElementById("cartRow-" + carrito.id).innerHTML += `
-                                                        <div id="cartPay-${carrito.id}" class="c-cart-list__item">
-                                                            <button class="c-button pagar">Pagar</button>
-                                                        </div>
-                                                        <div id="cartRecuperar-${carrito.id}" class="c-cart-list__item">
-                                                            <button class="c-button recuperar">Recuperar</button>
-                                                        </div>
-                                                        <div id="cartDelete-${carrito.id}" class="c-cart-list__item">
-                                                            <button class="c-button c-button--danger borrar">Borrar</button>
-                                                        </div>                                                        
-                                                    </div>
-                                                </div>`;
+                            <div class="c-cart-list__item c-cart-list__item--right">${ESTADO_CARRITO[carrito.estado]}</div>`;
+                if (carrito.estado == 1) {
+                    html += `
+                            <div id="cartPay-${carrito.id}" class="c-cart-list__item">
+                                <button class="c-button pagar">Pagar</button>
+                            </div>
+                            <div id="cartRecuperar-${carrito.id}" class="c-cart-list__item">
+                                <button class="c-button recuperar">Recuperar</button>
+                            </div>
+                            <div id="cartDelete-${carrito.id}" class="c-cart-list__item">
+                                <button class="c-button c-button--danger borrar">Borrar</button>
+                            </div>`;
                 };
+                html += `</div>`
             });
+            dialog.innerHTML = html;
+
             //Asignamos las respectivas funciones a los botones de los carritos
-            asignarEvento("fa-eye", "click", verDetalleCarrito);
+            asignarEvento("fa-eye", "click", verDetalleCarrito, "carritos");
             asignarEvento("pagar", "click", modalPago);
             asignarEvento("recuperar", "click", recuperarCarrito);
             asignarEvento("borrar", "click", confirmarBorrar);
@@ -312,7 +341,47 @@ function historialCarritos(id_usuario) {
         }).catch(alert("No tienes ningún carrito guardado", "Aviso"));
 }
 
-function verDetalleCarrito(carritoId) {
+function historialPagos(id_usuario) {
+    let dialog = document.getElementById("dialog");
+    dialog.close()
+
+    //Añadimos el encabezado del modal a la etiqueta dialog
+    dialog.classList = "c-modal c-modal--small pagosHistorial";
+    let html = `<div id='modalHistorialCarrito' class='c-bubble'>
+                    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-bottom-5">
+                        <div class="c-title">Historial Pagos</div>
+                        <i class="c-icon c-icon--close fa-sharp fa-solid fa-xmark close"></i>
+                    </div>
+                    <div class="c-bubble">
+                       <div class="c-cart-row c-cart-row--bold c-cart-row--4-columns">
+                           <div>Id</div>
+                           <div>Nombre Tarjeta</div>
+                           <div>Numero Tarjeta</div>
+                           <div>Id Carrito</div>
+                    </div>`
+
+    request("GET", "historial_pagos/" + id_usuario, null)
+        .then(pagos => {
+            Array.from(pagos).forEach(pago => {
+                html += `<div class="c-cart-list c-cart-row c-cart-row--4-columns">
+                            <div id="cartList-${pago.id_carrito}" class="c-cart-list__title-cart">
+                                <i class="c-icon c-icon--small fa-solid fa-eye"></i>
+                                Pago ${pago.id}</b>
+                            </div>
+                            <div class="c-cart-list__item">${pago.nombreTarjeta}</div>
+                            <div class="c-cart-list__item">**** ${pago.numeroTarjeta.substring(pago.numeroTarjeta.length-4, pago.numeroTarjeta.length)}</div>
+                            <div class="c-cart-list__item">${pago.id_carrito}</div>
+                        </div>`
+            });
+            dialog.innerHTML = html;
+
+            animacionSalidaModal("pagosHistorial", "c-modal--close");
+            asignarEvento("fa-eye", "click", verDetalleCarrito, "pago")
+            dialog.showModal();
+        }).catch(alert("No tienes ningún pago realizado", "Aviso"));
+}
+
+function verDetalleCarrito(carritoId, volver) {
     let dialog = document.getElementById("dialog");
     dialog.close();
 
@@ -337,34 +406,39 @@ function verDetalleCarrito(carritoId) {
         .then(carrito => {
             //Llamamos al método que devuelve los productos
             getProductsDetalleCarrito(carrito.productos)
-            .then(response => {
-                let htmlProductos = response[0];
-                let precioTotal = response[1];
-                htmlCarritoDetalle += htmlProductos
-                htmlCarritoDetalle += `	    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-vertical-8">
+                .then(response => {
+                    let htmlProductos = response[0];
+                    let precioTotal = response[1];
+                    htmlCarritoDetalle += htmlProductos
+                    htmlCarritoDetalle += `	    <div class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-vertical-8">
                                                 <div class="c-title">Importe: ${precioTotal.toFixed(2)}€</div>
                                                 <div id="detalleCarrito-${carrito.id}" class="l-flex l-flex--align-items-center l-flex--justify-content-space-between g--margin-vertical-8"></div>
                                             </div>
                                        </div>`;
-                
-                // Pintamos el html
-                dialog.innerHTML = htmlCarritoDetalle;
-                
-                // Añadimos los botones en los carritos pendientes de pago
-                if (carrito.estado != 0) {
-                    document.getElementById("detalleCarrito-" + carrito.id).innerHTML = `<div class="pagarDetalleCarrito c-cart-list__item"><button class="c-button">Pagar</button></div>
+
+                    // Pintamos el html
+                    dialog.innerHTML = htmlCarritoDetalle;
+
+                    // Añadimos los botones en los carritos pendientes de pago
+                    if (carrito.estado != 0) {
+                        document.getElementById("detalleCarrito-" + carrito.id).innerHTML = `<div class="pagarDetalleCarrito c-cart-list__item"><button class="c-button">Pagar</button></div>
                                                                                          <div class="recuperarDetalleCarrito c-cart-list__item"><button class="c-button">Recuperar</button></div>
-                                                                                         <div class="borrarDetalleCarrito c-cart-list__item"><button class="c-button c-button--danger">Borrar</button></div>`;                     
-                }
+                                                                                         <div class="borrarDetalleCarrito c-cart-list__item"><button class="c-button c-button--danger">Borrar</button></div>`;
+                    }
 
-                //Asignamos los eventos a los botones
-                asignarEvento("pagarDetalleCarrito", "click", modalPago);
-                asignarEvento("recuperarDetalleCarrito", "click", recuperarCarrito);
-                asignarEvento("borrarDetalleCarrito", "click", confirmarBorrar);
-                document.getElementsByClassName("volverHistorial")[0].addEventListener("click", () => historialCarritos(activeUser.id));
+                    //Asignamos los eventos a los botones
+                    asignarEvento("pagarDetalleCarrito", "click", modalPago);
+                    asignarEvento("recuperarDetalleCarrito", "click", recuperarCarrito);
+                    asignarEvento("borrarDetalleCarrito", "click", confirmarBorrar);
+                    if (volver == "pago") {
+                        document.getElementsByClassName("volverHistorial")[0].addEventListener("click", () => historialPagos(activeUser.id));
+                    }else{
+                        document.getElementsByClassName("volverHistorial")[0].addEventListener("click", () => historialCarritos(activeUser.id));
+                    }
+                    
 
-                dialog.showModal();
-            });
+                    dialog.showModal();
+                });
         });
 }
 
@@ -392,21 +466,34 @@ function realizarPago(carritoId) {
     for (const [key, value] of formData) {
         newPay[key] = value;
     }
-    console.log(newPay)
     if (!newPay["nombreTarjeta"] || !newPay["numeroTarjeta"] || !newPay["mesTarjeta"] || !newPay["anyoTarjeta"] || !newPay["codigoSeguridad"]) {
         alert("Por favor rellene todos los campos", "Datos incorrectos");
         return;
+    }else if (!checkPattern("nombreTarjeta", /[a-zA-Z\s]$/)) {
+        alert("El formato del nombre de la tarjeta es incorrecto, no puede contener números o carácteres especiales.", "Formato de datos");
+        return;
+    }else if(!checkPattern("numeroTarjeta", /[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/)){
+        alert("El formato del número de tarejeta es incorrecto, debe seguir el formato XXXX-XXXX-XXXX-XXXX.", "Formato de datos");
+        return;
+    }else if(!checkPattern("codigoSeguridad", /[0-9]{3}/)){          
+        alert("El formato deL código de seguridad es incorrecto, deben ser 3 números.", "Formato de datos");
+        return;
     } else {
-        console.log(carritoId)
         newPay.fechaCaducidad = newPay.mesTarjeta + "/" + newPay.anyoTarjeta
         newPay.id_carrito = carritoId;
+        newPay.id_usuario = activeUser.id;
         delete newPay.mesTarjeta;
         delete newPay.anyoTarjeta;
         request("POST", "pagos", newPay)
             .then(request("PATCH", "carritos/" + carritoId, { "estado": 0 })
                 .then(() => {
-                    document.getElementById("dialog").close()
-                    alert("El pago del carrito con id " + carritoId + " se ha realizado correctamente")
+                    document.getElementById("dialog").close();
+
+                    carrito = new Carrito(Date.now(), new Date().getFormattedDate(), 2, activeUser.id);
+                    window.localStorage.setItem("carrito", JSON.stringify(carrito));
+                    carrito.numeroArticulosTotal()
+
+                    alert("El pago del carrito con id " + carritoId + " se ha realizado correctamente");
                 })
                 .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR")))
             .catch(e => alert("La operación no se ha podido completar. (" + e.statusCode + " - " + e.statusText + ")", "ERROR"))
@@ -415,61 +502,63 @@ function realizarPago(carritoId) {
 
 function recuperarCarrito(carritoId) {
     //Petición para recuperar el carrito actual (devuelve un array)
-    request("GET", "carritoActual/"+activeUser.id, null)
-    .then(c => {
-        //Con el id, localizamos del array el carrito actual y modificamos su estado para que deje de ser el actual
-        request("PATCH", "carritos/"+c[0].id, {"estado": 1})
-        .then(() => {
-            //Petición para marcar como actual el carrito seleccionado por el usuario
-            request("PATCH", "carritos/"+carritoId, {"estado": 2})
-            .then(() => {
-                //Vaciamos el carrito
-                c.productos = [];
-                window.localStorage.setItem("carrito", JSON.stringify(c)); 
-                //Pintamos el nuevo carrito
-                pintarCarritoRecuperado(carritoId);           
-            })
-            .catch(e => console.log(e));
+    request("GET", "carritoActual/" + activeUser.id, null)
+        .then(c => {
+            //Con el id, localizamos del array el carrito actual y modificamos su estado para que deje de ser el actual
+            request("PATCH", "carritos/" + c[0].id, { "estado": 1 })
+                .then(() => {
+                    //Petición para marcar como actual el carrito seleccionado por el usuario
+                    request("PATCH", "carritos/" + carritoId, { "estado": 2 })
+                        .then(() => {
+                            //Vaciamos el carrito
+                            c.productos = [];
+                            
+                            window.localStorage.setItem("carrito", JSON.stringify(c));
+                            c.numeroArticulosTotal()
+                            //Pintamos el nuevo carrito
+                            pintarCarritoRecuperado(carritoId);
+                        })
+                        .catch(e => console.log(e));
+                })
+                .catch(e => console.log(e));
         })
-        .catch(e => console.log(e));
-    })
-    .catch(() => {
-        //Petición para cuando no existe un carrito actual
-        request("PATCH", "carritos/"+carritoId, {"estado": 2})
-        .then(() => pintarCarritoRecuperado(carritoId))
-        .catch(e => console.log(e));
-    });
+        .catch(() => {
+            //Petición para cuando no existe un carrito actual
+            request("PATCH", "carritos/" + carritoId, { "estado": 2 })
+                .then(() => pintarCarritoRecuperado(carritoId))
+                .catch(e => console.log(e));
+        });
 }
 
 function pintarCarritoRecuperado(carritoId) {
     //Petición para recuperar el carrito seleccionado por el usuario
     request("GET", "carritos/" + carritoId, null)
-    .then(carritoActual => {
-        console.log(carritoActual);
-        carritoActual.productos.forEach(p => {
-            // carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")));
-            carrito = carritoSerialize(carritoActual);
-            let nuevoArticulo = {
-                "id_producto": p.id_producto,
-                "cantidad": p.cantidad--
-            }
-            carrito.anyadeArticulo(nuevoArticulo);
-            window.localStorage.setItem("carrito", JSON.stringify(carrito));
-            carrito.actualizarCarrito();
-        }) 
-    })
-    .catch(e => console.log(e));
+        .then(carritoActual => {
+            console.log(carritoActual);
+            carritoActual.productos.forEach(p => {
+                // carrito = carritoSerialize(JSON.parse(window.localStorage.getItem("carrito")));
+                carrito = carritoSerialize(carritoActual);
+                let nuevoArticulo = {
+                    "id_producto": p.id_producto,
+                    "cantidad": p.cantidad--
+                }
+                carrito.anyadeArticulo(nuevoArticulo);
+                window.localStorage.setItem("carrito", JSON.stringify(carrito));
+                carrito.actualizarCarrito();
+            })
+        })
+        .catch(e => console.log(e));
 }
 
-function confirmarBorrar(carritoId){
+function confirmarBorrar(carritoId) {
     confirmar(carritoId);
 }
 
 function borrarCarrito(carritoId) {
     request("DELETE", "carritos/" + carritoId, null)
-    .then(res => {
-        console.log(res);
-        historialCarritos(activeUser.id);
-    })
-    .catch(e => console.log(e));
+        .then(res => {
+            console.log(res);
+            historialCarritos(activeUser.id);
+        })
+        .catch(e => console.log(e));
 }
