@@ -28,11 +28,11 @@ function modalLogin() {
                             </form>
                            
                             <div class="g--text-align-center">
-                                <div class="c-title c-title--alternativo">Bienvenido a</div>
+                                <div class="c-title c-title--alternativo">Bienvenido/a a</div>
                                 <img src="./assets/img/EducaCafe-2-08.png" alt="educafe_logo" class="c-img">
                                 <div>
                                     <button class="c-button c-button--alternativo-terciario g--margin-bottom-2">¿No tienes cuenta? Regístrate</button><br>
-                                    <button id="registro" class="c-button c-button--secuendario">Regístrarse</button>
+                                    <button id="registro" class="c-button c-button--secundario">Regístrarse</button>
                                 </div>
                             </div>
                         </div>`;

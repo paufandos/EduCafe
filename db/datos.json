@@ -321,6 +321,13 @@
       "correo": "fandosgorrispau@gmail.com",
       "password": "1234",
       "id": 2
+    },
+    {
+      "nombre": "Pau",
+      "apellidos": "Fandos",
+      "correo": "a@a.es",
+      "password": "1",
+      "id": 3
     }
   ],
   "carritos": [
@@ -367,7 +374,7 @@
     {
       "id": 1674200868769,
       "fecha": "20-00-2023",
-      "estado": 1,
+      "estado": 0,
       "id_usuario": 2,
       "productos": [
         {
@@ -381,22 +388,6 @@
         {
           "id_producto": "22",
           "cantidad": 1
-        }
-      ]
-    },
-    {
-      "id": 1674200891059,
-      "fecha": "20-00-2023",
-      "estado": 1,
-      "id_usuario": 2,
-      "productos": [
-        {
-          "id_producto": "4",
-          "cantidad": 1
-        },
-        {
-          "id_producto": "3",
-          "cantidad": 4
         }
       ]
     },
@@ -495,6 +486,38 @@
           "cantidad": 1
         }
       ]
+    },
+    {
+      "id": 1674211959937,
+      "fecha": "20-00-2023",
+      "estado": 0,
+      "id_usuario": 3,
+      "productos": [
+        {
+          "id_producto": "12",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "11",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": 1674213054237,
+      "fecha": "20-00-2023",
+      "estado": 2,
+      "id_usuario": 2,
+      "productos": [
+        {
+          "id_producto": "24",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "23",
+          "cantidad": 1
+        }
+      ]
     }
   ],
   "pagos": [
@@ -515,6 +538,24 @@
       "id_carrito": "1674200512390",
       "id_usuario": 2,
       "id": 2
+    },
+    {
+      "nombreTarjeta": "pau",
+      "numeroTarjeta": "1111-1111-1111-1111",
+      "codigoSeguridad": "345",
+      "fechaCaducidad": "12/26",
+      "id_carrito": "1674211959937",
+      "id_usuario": 3,
+      "id": 3
+    },
+    {
+      "nombreTarjeta": "sdsad",
+      "numeroTarjeta": "1111-1111-1111-1111",
+      "codigoSeguridad": "233",
+      "fechaCaducidad": "12/34",
+      "id_carrito": "1674200868769",
+      "id_usuario": 2,
+      "id": 4
     }
   ]
 }
