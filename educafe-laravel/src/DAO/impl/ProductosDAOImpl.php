@@ -22,6 +22,7 @@ class ProductosDAOImpl implements IProductosDAO{
                 $producto["nombre"],
                 $producto["descripcion"],
                 $producto["precio"]
+
             ));
         }
 

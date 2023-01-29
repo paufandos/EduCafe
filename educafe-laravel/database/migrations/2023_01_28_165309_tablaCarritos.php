@@ -12,7 +12,7 @@ class TablaCarritos extends Migration {
             $table->string('fecha');
             $table->integer('estado');
             $table->unsignedBigInteger('id_usuario');
-            $table->json('productos');
+            //$table->json('productos');
             $table->timestamps();
 
             //$table->foreign('id_usuario')->references('id')->on('usuarios');

@@ -12,7 +12,7 @@ function addRefreshEvents() {
 function request(method, parametro, body = null) {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
-    xhr.open(method, `http://localhost:3000/${parametro}`);
+    xhr.open(method, `http://127.0.0.1:8000/api/${parametro}`);
     xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
     if(body!=null){
       xhr.send(JSON.stringify(body));

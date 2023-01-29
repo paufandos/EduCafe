@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use EduCafe\Domain\Services\ICarritosService;
+use EduCafe\Domain\Services\IProductosService;
 use EduCafe\Domain\Services\impl\ProductosServiceImpl;
 
 class ProductosController extends Controller {
-    private ICarritosService $servicio;
+    private IProductosService $servicio;
 
     function __construct() {
         $this->servicio = new ProductosServiceImpl();

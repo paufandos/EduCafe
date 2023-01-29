@@ -14,7 +14,7 @@ class TablaProductos extends Migration {
     public function up() {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_categoria');
             $table->string('nombre');
             $table->text('descripcion');
             $table->float('precio');
