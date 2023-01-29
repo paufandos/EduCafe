@@ -10,6 +10,6 @@ class Usuarios extends Model {
     use HasFactory;
 
     protected $connection = 'mysql';
-    protected $collection = 'usuarios';
+    protected $tabla = 'usuarios';
 
 }

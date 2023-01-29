@@ -13,15 +13,15 @@ class ProductosDAOImpl implements IProductosDAO{
     public function read(): array {
 
         $result = [];
-        $productos = Productos::all()->toArray();
+        $productos = Productos::get()->toArray();
 
         foreach ($productos as $producto) {
             array_push($result, new ProductosDTO(
-                $producto['_id'],
-                $producto["idCliente"],
-                $producto["pagado"],
-                $producto["articulos"],
-                $producto["fechaCreacion"]
+                $producto['id'],
+                $producto["id_categoria"],
+                $producto["nombre"],
+                $producto["descripcion"],
+                $producto["precio"]
             ));
         }
 
@@ -32,11 +32,11 @@ class ProductosDAOImpl implements IProductosDAO{
 
         $producto = new Productos();
 
-        $producto->_id = $request->_id;
-        $producto->idCliente = $request->idCliente;
-        $producto->pagado = $request->pagado;
-        $producto->articulos = $request->articulos;
-        $producto->fechaCreacion = $request->fechaCreacion;
+        $producto->id = $request->id;
+        $producto->id_categoria = $request->id_categoria;
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
 
         return $producto->save();
     }
@@ -45,12 +45,13 @@ class ProductosDAOImpl implements IProductosDAO{
 
         $producto = Productos::all()->find($id);
 
+
         $result = new ProductosDTO(
-            $producto['_id'],
-            $producto["idCliente"],
-            $producto["pagado"],
-            $producto["articulos"],
-            $producto["fechaCreacion"]
+            $producto['id'],
+            $producto['id_categoria'],
+            $producto['nombre'],
+            $producto['descripcion'],
+            $producto['precio']
         );
 
         return $result;
@@ -63,11 +64,12 @@ class ProductosDAOImpl implements IProductosDAO{
 
     public function update(Request $request, $id): bool {
 
-        $producto = Productos::where('_id',intval($id))->update([
-            'idCliente' => $request->idCliente,
-            'pagado' => $request->pagado,
-            'articulos' => $request->articulos,
-            'fechaCreacion' => $request->fechaCreacion,
+        $producto = Productos::where('id',intval($id))->update([
+            'id' => $request->id,
+            'id_categoria' => $request->id_categoria,
+            'productos' => $request->productos,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
             ]
         );
 

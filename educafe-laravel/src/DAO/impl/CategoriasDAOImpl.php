@@ -3,20 +3,19 @@ namespace EduCafe\DAO\impl;
 
 use App\Models\Categorias;
 use Illuminate\Http\Request;
+use EduCafe\DTO\CategoriasDTO;
+use EduCafe\DAO\ICategoriasDAO;
 
 class CategoriasDAOImpl implements ICategoriasDAO{
     public function read(): array {
 
         $result = [];
-        $categorias = Categorias::all()->toArray();
+        $categorias = Categorias::get()->toArray();
 
         foreach ($categorias as $categoria) {
             array_push($result, new CategoriasDTO(
-                $categoria['_id'],
-                $categoria["idCliente"],
-                $categoria["pagado"],
-                $categoria["articulos"],
-                $categoria["fechaCreacion"]
+                $categoria['id'],
+                $categoria["nombre"],
             ));
         }
 
@@ -27,11 +26,8 @@ class CategoriasDAOImpl implements ICategoriasDAO{
 
         $categoria = new Categorias();
 
-        $categoria->_id = $request->_id;
-        $categoria->idCliente = $request->idCliente;
-        $categoria->pagado = $request->pagado;
-        $categoria->articulos = $request->articulos;
-        $categoria->fechaCreacion = $request->fechaCreacion;
+        $categoria->id = $request->id;
+        $categoria->nombre = $request->nombre;
 
         return $categoria->save();
     }
@@ -41,11 +37,8 @@ class CategoriasDAOImpl implements ICategoriasDAO{
         $categoria = Categorias::all()->find($id);
 
         $result = new CategoriasDTO(
-            $categoria['_id'],
-            $categoria["idCliente"],
-            $categoria["pagado"],
-            $categoria["articulos"],
-            $categoria["fechaCreacion"]
+            $categoria['id'],
+            $categoria["nombre"]
         );
 
         return $result;
@@ -59,10 +52,8 @@ class CategoriasDAOImpl implements ICategoriasDAO{
     public function update(Request $request, $id): bool {
 
         $categoria = Categorias::where('_id',intval($id))->update([
-            'idCliente' => $request->idCliente,
-            'pagado' => $request->pagado,
-            'articulos' => $request->articulos,
-            'fechaCreacion' => $request->fechaCreacion,
+            'id' => $request->id,
+            'nombre' => $request->nombre
             ]
         );
 

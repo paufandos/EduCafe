@@ -9,7 +9,7 @@ class Categorias extends Model {
 
     use HasFactory;
 
-    protected $connection = 'mongodb';
-    protected $collection = 'categorias';
+    protected $connection = 'mysql';
+    protected $tabla = 'categorias';
 
 }

@@ -10,6 +10,7 @@ class Carritos extends Model {
     use HasFactory;
 
     protected $connection = 'mysql';
-    protected $collection = 'carritos';
+
+    protected $tabla = 'carritos';
 
 }

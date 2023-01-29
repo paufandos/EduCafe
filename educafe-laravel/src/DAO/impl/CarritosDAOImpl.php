@@ -14,7 +14,7 @@ class CarritosDAOImpl implements ICarritosDAO{
 
         $result = [];
 
-        $carritos = Carritos::all()->toArray();
+        $carritos = Carritos::get()->toArray();
 
         foreach ($carritos as $carrito) {
             array_push($result, new CarritosDTO(
@@ -64,11 +64,12 @@ class CarritosDAOImpl implements ICarritosDAO{
 
     public function update(Request $request, $id): bool {
 
-        $carrito = Carritos::where('_id',intval($id))->update([
-            'idCliente' => $request->idCliente,
-            'pagado' => $request->pagado,
-            'articulos' => $request->articulos,
-            'fechaCreacion' => $request->fechaCreacion,
+        $carrito = Carritos::where('id',intval($id))->update([
+            'id' => $request->id,
+            'fecha' => $request->fecha,
+            'estado' => $request->estado,
+            'id_usuario' => $request->id_usuario,
+            'productos' => $request->productos,
             ]
         );
 

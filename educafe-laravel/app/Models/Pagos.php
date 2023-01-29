@@ -10,5 +10,5 @@ class Pagos extends Model {
     use HasFactory;
 
     protected $connection = 'mysql';
-    protected $collection = 'pagos';
+    protected $tabla = 'pagos';
 }

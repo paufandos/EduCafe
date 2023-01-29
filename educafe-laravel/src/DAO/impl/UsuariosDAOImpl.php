@@ -1,6 +1,9 @@
 <?php
 namespace EduCafe\DAO\impl;
 
+use App\Models\Usuarios;
+use EduCafe\DTO\UsuariosDTO;
+use Illuminate\Http\Request;
 use EduCafe\DAO\IUsuariosDAO;
 
 
@@ -9,15 +12,15 @@ class UsuariosDAOImpl implements IUsuariosDAO{
     public function read(): array {
 
         $result = [];
-        $usuarios = Usuarios::all()->toArray();
+        $usuarios = Usuarios::get()->toArray();
 
         foreach ($usuarios as $usuario) {
             array_push($result, new UsuariosDTO(
-                $usuario['_id'],
-                $usuario["idCliente"],
-                $usuario["pagado"],
-                $usuario["articulos"],
-                $usuario["fechaCreacion"]
+                $usuario['nombre'],
+                $usuario["apellitos"],
+                $usuario["correo"],
+                $usuario["password"],
+                $usuario["id"]
             ));
         }
 
@@ -28,11 +31,12 @@ class UsuariosDAOImpl implements IUsuariosDAO{
 
         $usuario = new Usuarios();
 
-        $usuario->_id = $request->_id;
-        $usuario->idCliente = $request->idCliente;
-        $usuario->pagado = $request->pagado;
-        $usuario->articulos = $request->articulos;
-        $usuario->fechaCreacion = $request->fechaCreacion;
+        $usuario->id = $request->id;
+        $usuario->nombre = $request->nombre;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->correo = $request->correo;
+        $usuario->password = $request->password;
+        $usuario->id = $request->id;
 
         return $usuario->save();
     }
@@ -42,11 +46,12 @@ class UsuariosDAOImpl implements IUsuariosDAO{
         $usuario = Usuarios::all()->find($id);
 
         $result = new UsuariosDTO(
-            $usuario['_id'],
-            $usuario["idCliente"],
-            $usuario["pagado"],
-            $usuario["articulos"],
-            $usuario["fechaCreacion"]
+            $usuario['id'],
+            $usuario["nombre"],
+            $usuario["apellidos"],
+            $usuario["correo"],
+            $usuario["password"],
+            $usuario["id"]
         );
 
         return $result;
@@ -59,11 +64,13 @@ class UsuariosDAOImpl implements IUsuariosDAO{
 
     public function update(Request $request, $id): bool {
 
-        $usuario = Usuarios::where('_id',intval($id))->update([
-            'idCliente' => $request->idCliente,
-            'pagado' => $request->pagado,
-            'articulos' => $request->articulos,
-            'fechaCreacion' => $request->fechaCreacion,
+        $usuario = Usuarios::where('id',intval($id))->update([
+            'id' => $request->idCliente,
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos,
+            'correo' => $request->correo,
+            'password' => $request->password,
+            'id' => $request->id,
             ]
         );
 
