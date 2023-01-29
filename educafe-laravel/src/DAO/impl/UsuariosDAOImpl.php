@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use EduCafe\DAO\IUsuariosDAO;
 
 
-
 class UsuariosDAOImpl implements IUsuariosDAO{
     public function read(): array {
 
@@ -16,11 +15,9 @@ class UsuariosDAOImpl implements IUsuariosDAO{
 
         foreach ($usuarios as $usuario) {
             array_push($result, new UsuariosDTO(
-                $usuario['nombre'],
-                $usuario["apellitos"],
-                $usuario["correo"],
+                $usuario["id"],
+                $usuario['email'],
                 $usuario["password"],
-                $usuario["id"]
             ));
         }
 
@@ -30,13 +27,8 @@ class UsuariosDAOImpl implements IUsuariosDAO{
     public function create(Request $request): bool {
 
         $usuario = new Usuarios();
-
-        $usuario->id = $request->id;
-        $usuario->nombre = $request->nombre;
-        $usuario->apellidos = $request->apellidos;
         $usuario->correo = $request->correo;
         $usuario->password = $request->password;
-        $usuario->id = $request->id;
 
         return $usuario->save();
     }
@@ -46,12 +38,9 @@ class UsuariosDAOImpl implements IUsuariosDAO{
         $usuario = Usuarios::all()->find($id);
 
         $result = new UsuariosDTO(
-            $usuario['id'],
-            $usuario["nombre"],
-            $usuario["apellidos"],
-            $usuario["correo"],
-            $usuario["password"],
-            $usuario["id"]
+            $usuario["id"],
+            $usuario["email"],
+            $usuario["password"]
         );
 
         return $result;
@@ -65,12 +54,9 @@ class UsuariosDAOImpl implements IUsuariosDAO{
     public function update(Request $request, $id): bool {
 
         $usuario = Usuarios::where('id',intval($id))->update([
-            'id' => $request->idCliente,
-            'nombre' => $request->nombre,
-            'apellidos' => $request->apellidos,
-            'correo' => $request->correo,
-            'password' => $request->password,
             'id' => $request->id,
+            'email' => $request->email,
+            'password' => $request->password
             ]
         );
 

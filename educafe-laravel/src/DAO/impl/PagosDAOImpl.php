@@ -19,7 +19,7 @@ class PagosDAOImpl implements IPagosDAO{
                 $pago["codigoSeguridad"],
                 $pago["fechaCaducidad"],
                 $pago["id_carrito"],
-                $pago["id_usuario "],
+                $pago["id_usuario"],
                 $pago["id"]
             ));
         }

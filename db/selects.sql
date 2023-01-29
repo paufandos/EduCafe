@@ -5,4 +5,3 @@ SELECT * FROM educafe.usuarios;
 SELECT * FROM educafe.pagos;
 
 
-

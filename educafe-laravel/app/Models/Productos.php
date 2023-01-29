@@ -9,6 +9,5 @@ class Productos extends Model {
 
     use HasFactory;
 
-    protected $connection = 'mysql';
     protected $tabla = 'productos';
 }
