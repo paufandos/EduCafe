@@ -328,6 +328,13 @@
       "correo": "a@a.es",
       "password": "1",
       "id": 3
+    },
+    {
+      "nombre": "Empren ",
+      "apellidos": "FP Mislata",
+      "correo": "emprenfpmislata@gmail.com",
+      "password": "1234",
+      "id": 4
     }
   ],
   "carritos": [
@@ -518,6 +525,22 @@
           "cantidad": 1
         }
       ]
+    },
+    {
+      "id": 1675159559552,
+      "fecha": "31-00-2023",
+      "estado": 0,
+      "id_usuario": 4,
+      "productos": [
+        {
+          "id_producto": "23",
+          "cantidad": 1
+        },
+        {
+          "id_producto": "22",
+          "cantidad": 1
+        }
+      ]
     }
   ],
   "pagos": [
@@ -556,6 +579,15 @@
       "id_carrito": "1674200868769",
       "id_usuario": 2,
       "id": 4
+    },
+    {
+      "nombreTarjeta": "EMPREN FP MISLATA",
+      "numeroTarjeta": "1234-5678-9123-4567",
+      "codigoSeguridad": "468",
+      "fechaCaducidad": "02/25",
+      "id_carrito": "1675159559552",
+      "id_usuario": 4,
+      "id": 5
     }
   ]
 }
